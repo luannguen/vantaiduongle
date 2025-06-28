@@ -9,7 +9,7 @@ const testimonials = [
         name: "Nguyễn Văn A",
         company: "Công ty ABC",
         rating: 5,
-        comment: "Dịch vụ tuyệt vời! Hàng hóa được giao đúng hẹn và an toàn. Tôi sẽ tiếp tục sử dụng dịch vụ của Vận Tải Dương Lê.",
+        comment: "Dịch vụ tuyệt vời! Hàng hóa được giao đúng hẹn và an toàn. Tôi sẽ tiếp tục sử dụng dịch vụ của Vận Tải 62 Dương Lê.",
         route: "Hà Nội → TP.HCM",
         cargo: "Điện tử",
         date: "15/12/2024"

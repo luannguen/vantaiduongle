@@ -28,7 +28,7 @@ export default function PriceCalculator() {
     }
 
     return (
-        <section className="py-20 bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 relative overflow-hidden">
+        <section id="pricing" className="py-20 bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 relative overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 opacity-10">
                 <div className="absolute top-20 left-20 w-40 h-40 bg-blue-400 rounded-full blur-3xl animate-pulse"></div>

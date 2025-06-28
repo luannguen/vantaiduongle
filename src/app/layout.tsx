@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import SocialWidget from '@/components/SocialWidget';
 import StickyCTA from '@/components/StickyCTA';
 import { LanguageProvider } from '@/contexts/LanguageContext';
+import { COMPANY_INFO } from '@/lib/company-metadata';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/animations.css";
@@ -17,13 +18,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Vận Tải Dương Lê - Dịch vụ vận chuyển hàng hóa từ Bắc vào Nam",
+  title: `${COMPANY_INFO.name.vi} - Dịch vụ vận chuyển hàng hóa từ Bắc vào Nam`,
   description: "Dịch vụ vận tải đường bộ uy tín với đội xe tải từ 1 tấn đến 10 tấn. Cam kết giao hàng nhanh chóng, an toàn và đúng hẹn trên toàn quốc.",
-  keywords: "vận tải, vận chuyển, xe tải, giao hàng, Dương Lê, Hà Nội, TP.HCM",
-  authors: [{ name: "Vận Tải Dương Lê" }],
+  keywords: COMPANY_INFO.seo.keywords.vi,
+  authors: [{ name: COMPANY_INFO.name.vi }],
   openGraph: {
-    title: "Vận Tải Dương Lê - Dịch vụ vận chuyển uy tín",
-    description: "Dịch vụ vận tải đường bộ chuyên nghiệp từ Bắc vào Nam",
+    title: `${COMPANY_INFO.name.vi} - Dịch vụ vận chuyển uy tín`,
+    description: COMPANY_INFO.slogan.vi,
     type: "website",
     locale: "vi_VN",
   },

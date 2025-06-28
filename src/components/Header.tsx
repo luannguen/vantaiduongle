@@ -1,6 +1,7 @@
 'use client'
 
 import { useLanguage } from '@/contexts/LanguageContext'
+import { COMPANY_INFO, getCompanyName } from '@/lib/company-metadata'
 import { Mail, Menu, Phone, Truck, X } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -40,11 +41,11 @@ export default function Header() {
                             <div className="flex items-center bg-white/70 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm border border-orange-100">
                                 <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
                                 <Phone className="w-4 h-4 mr-2 text-orange-600" />
-                                <span className="font-semibold text-slate-700">Hotline: 0912 345 678</span>
+                                <span className="font-semibold text-slate-700">Hotline: {COMPANY_INFO.contact.phone.primary}</span>
                             </div>
                             <div className="flex items-center bg-white/70 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm border border-orange-100">
                                 <Mail className="w-4 h-4 mr-2 text-orange-600" />
-                                <span className="font-medium text-slate-700">info@vantaiduongle.com</span>
+                                <span className="font-medium text-slate-700">{COMPANY_INFO.contact.email.primary}</span>
                             </div>
                             <div className="hidden lg:flex items-center bg-gradient-to-r from-orange-100 to-amber-100 px-3 py-1.5 rounded-full shadow-sm border border-orange-200">
                                 <div className="w-2 h-2 bg-orange-400 rounded-full mr-2 animate-pulse"></div>
@@ -67,7 +68,7 @@ export default function Header() {
                 {/* Main header */}
                 <div className={`flex justify-between items-center transition-all duration-300 ${isScrolled ? 'py-3' : 'py-4'
                     }`}>
-                    <div className="flex items-center group">
+                    <Link href="/" className="flex items-center group">
                         <div className="relative">
                             <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
                             <Truck className={`relative text-white bg-gradient-to-br from-orange-500 to-amber-600 p-2 rounded-xl shadow-lg transition-all duration-300 ${isScrolled ? 'w-10 h-10' : 'w-12 h-12'
@@ -76,7 +77,7 @@ export default function Header() {
                         <div className="ml-4">
                             <h1 className={`brand-title text-2xl bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent transition-all duration-300 ${isScrolled ? 'text-xl' : 'text-2xl'
                                 } group-hover:from-orange-700 group-hover:via-amber-700 group-hover:to-yellow-700`}>
-                                Vận Tải Dương Lê
+                                {getCompanyName('vi')}
                             </h1>
                             <div className="flex items-center space-x-2">
                                 <p className={`text-slate-600 transition-all duration-300 ${isScrolled ? 'text-xs opacity-75' : 'text-sm opacity-100'
@@ -90,31 +91,31 @@ export default function Header() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
 
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex space-x-8">
-                        <Link href="#home" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
+                        <Link href="/#home" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
                             {t('home')}
                             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-amber-500 transition-all duration-300 group-hover:w-full rounded-full"></span>
                             <span className="absolute inset-0 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
                         </Link>
-                        <Link href="#services" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
+                        <Link href="/#services" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
                             {t('services')}
                             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-amber-500 transition-all duration-300 group-hover:w-full rounded-full"></span>
                             <span className="absolute inset-0 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
                         </Link>
-                        <Link href="#trucks" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
+                        <Link href="/#trucks" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
                             {t('trucks')}
                             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-amber-500 transition-all duration-300 group-hover:w-full rounded-full"></span>
                             <span className="absolute inset-0 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
                         </Link>
-                        <Link href="#about" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
+                        <Link href="/#about" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
                             {t('about')}
                             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-amber-500 transition-all duration-300 group-hover:w-full rounded-full"></span>
                             <span className="absolute inset-0 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
                         </Link>
-                        <Link href="#contact" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
+                        <Link href="/#contact" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
                             {t('contact')}
                             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-amber-500 transition-all duration-300 group-hover:w-full rounded-full"></span>
                             <span className="absolute inset-0 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
@@ -150,35 +151,35 @@ export default function Header() {
                 <div className="md:hidden bg-gradient-to-r from-orange-50/95 via-amber-50/95 to-yellow-50/95 backdrop-blur-lg border-t border-orange-200/50 animate-slideDown shadow-xl">
                     <nav className="px-4 py-6 space-y-2">
                         <Link
-                            href="#home"
+                            href="/#home"
                             className="nav-link block text-slate-700 hover:text-orange-600 transition-all duration-300 py-3 px-4 rounded-xl hover:bg-white/70 hover:shadow-sm hover:translate-x-2 border border-transparent hover:border-orange-100"
                             onClick={() => setIsMenuOpen(false)}
                         >
                             {t('home')}
                         </Link>
                         <Link
-                            href="#services"
+                            href="/#services"
                             className="nav-link block text-slate-700 hover:text-orange-600 transition-all duration-300 py-3 px-4 rounded-xl hover:bg-white/70 hover:shadow-sm hover:translate-x-2 border border-transparent hover:border-orange-100"
                             onClick={() => setIsMenuOpen(false)}
                         >
                             {t('services')}
                         </Link>
                         <Link
-                            href="#trucks"
+                            href="/#trucks"
                             className="nav-link block text-slate-700 hover:text-orange-600 transition-all duration-300 py-3 px-4 rounded-xl hover:bg-white/70 hover:shadow-sm hover:translate-x-2 border border-transparent hover:border-orange-100"
                             onClick={() => setIsMenuOpen(false)}
                         >
                             {t('trucks')}
                         </Link>
                         <Link
-                            href="#about"
+                            href="/#about"
                             className="nav-link block text-slate-700 hover:text-orange-600 transition-all duration-300 py-3 px-4 rounded-xl hover:bg-white/70 hover:shadow-sm hover:translate-x-2 border border-transparent hover:border-orange-100"
                             onClick={() => setIsMenuOpen(false)}
                         >
                             {t('about')}
                         </Link>
                         <Link
-                            href="#contact"
+                            href="/#contact"
                             className="nav-link block text-slate-700 hover:text-orange-600 transition-all duration-300 py-3 px-4 rounded-xl hover:bg-white/70 hover:shadow-sm hover:translate-x-2 border border-transparent hover:border-orange-100"
                             onClick={() => setIsMenuOpen(false)}
                         >

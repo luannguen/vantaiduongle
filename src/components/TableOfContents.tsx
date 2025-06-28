@@ -342,7 +342,7 @@ export default function TableOfContents() {
                                         <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-3">
                                             <span className="text-blue-600 font-bold text-lg">DL</span>
                                         </div>
-                                        <p className="text-sm font-medium text-gray-900">Vận Tải Dương Lê</p>
+                                        <p className="text-sm font-medium text-gray-900">Vận Tải 62 Dương Lê</p>
                                         <p className="text-xs text-gray-600">Kết nối mọi miền đất nước</p>
                                     </div>
                                 </motion.div>

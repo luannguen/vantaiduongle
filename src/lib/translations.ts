@@ -1,3 +1,5 @@
+import { COMPANY_INFO, getCompanyDescription, getCompanyName, getCompanySlogan } from './company-metadata';
+
 export const translations = {
     vi: {
         // Header
@@ -9,8 +11,8 @@ export const translations = {
         bookNow: 'Đặt xe ngay',
 
         // Hero
-        heroTitle: 'Vận Tải Dương Lê',
-        heroSubtitle: 'Dịch vụ vận chuyển hàng hóa uy tín từ Bắc vào Nam',
+        heroTitle: getCompanyName('vi'),
+        heroSubtitle: getCompanySlogan('vi'),
         heroDescription: 'Với đội xe đa dạng từ 1-10 tấn và đội ngũ tài xế kinh nghiệm, chúng tôi cam kết mang đến dịch vụ vận chuyển nhanh chóng, an toàn và giá cả hợp lý.',
         getQuote: 'Báo giá ngay',
         callNow: 'Gọi ngay',
@@ -36,16 +38,16 @@ export const translations = {
 
         // Footer
         workingHours: 'Giờ làm việc',
-        allWeek: 'Thứ 2 - Chủ nhật: 24/7',
-        nonstop: 'Phục vụ không ngừng nghỉ',
+        allWeek: COMPANY_INFO.workingHours.vi.weekdays,
+        nonstop: COMPANY_INFO.workingHours.vi.note,
 
         // Truck Types
         trucksTitle: 'Đội xe đa dạng',
         tonTruck: 'tấn',
 
         // About
-        aboutTitle: 'Về Vận Tải Dương Lê',
-        aboutDescription: 'Với hơn 15 năm kinh nghiệm trong lĩnh vực vận tải, Vận Tải Dương Lê đã trở thành đối tác tin cậy của hàng nghìn khách hàng trên toàn quốc.',
+        aboutTitle: `Về ${getCompanyName('vi')}`,
+        aboutDescription: getCompanyDescription('vi'),
 
         // Common
         learnMore: 'Tìm hiểu thêm',
@@ -63,8 +65,8 @@ export const translations = {
         bookNow: 'Book Now',
 
         // Hero
-        heroTitle: 'Duong Le Transport',
-        heroSubtitle: 'Reliable freight transport services from North to South Vietnam',
+        heroTitle: getCompanyName('en'),
+        heroSubtitle: getCompanySlogan('en'),
         heroDescription: 'With our diverse fleet of 1-10 ton trucks and experienced drivers, we are committed to providing fast, safe and affordable transportation services.',
         getQuote: 'Get Quote',
         callNow: 'Call Now',
@@ -90,16 +92,16 @@ export const translations = {
 
         // Footer
         workingHours: 'Working Hours',
-        allWeek: 'Monday - Sunday: 24/7',
-        nonstop: 'Non-stop service',
+        allWeek: COMPANY_INFO.workingHours.en.weekdays,
+        nonstop: COMPANY_INFO.workingHours.en.note,
 
         // Truck Types
         trucksTitle: 'Diverse Fleet',
         tonTruck: 'ton',
 
         // About
-        aboutTitle: 'About Duong Le Transport',
-        aboutDescription: 'With over 15 years of experience in the transportation industry, Duong Le Transport has become a trusted partner for thousands of customers nationwide.',
+        aboutTitle: `About ${getCompanyName('en')}`,
+        aboutDescription: getCompanyDescription('en'),
 
         // Common
         learnMore: 'Learn More',

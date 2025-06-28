@@ -14,7 +14,7 @@ const videoTestimonials = [
         videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
         thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=face",
         duration: "2:45",
-        quote: "Sau 3 năm hợp tác, Vận Tải Dương Lê đã giúp chúng tôi tiết kiệm 30% chi phí logistics và tăng hiệu quả giao hàng lên 95%.",
+        quote: "Sau 3 năm hợp tác, Vận Tải 62 Dương Lê đã giúp chúng tôi tiết kiệm 30% chi phí logistics và tăng hiệu quả giao hàng lên 95%.",
         metrics: {
             costSaving: "30%",
             efficiency: "95%",
@@ -48,7 +48,7 @@ const videoTestimonials = [
         videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
         thumbnail: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=300&fit=crop&crop=face",
         duration: "4:20",
-        quote: "Với quy mô sản xuất lớn, chúng tôi cần đối tác logistics đáng tin cậy. Vận Tải Dương Lê không chỉ đáp ứng mà còn vượt xa mong đợi của chúng tôi.",
+        quote: "Với quy mô sản xuất lớn, chúng tôi cần đối tác logistics đáng tin cậy. Vận Tải 62 Dương Lê không chỉ đáp ứng mà còn vượt xa mong đợi của chúng tôi.",
         metrics: {
             volume: "500+ chuyến/tháng",
             onTime: "99.5%",
@@ -115,7 +115,7 @@ export default function VideoTestimonials() {
                     </div>
                     <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                         Nghe trực tiếp từ các CEO và Giám Đốc về trải nghiệm hợp tác
-                        và những thành công đạt được cùng Vận Tải Dương Lê
+                        và những thành công đạt được cùng Vận Tải 62 Dương Lê
                     </p>
                 </motion.div>
 

@@ -31,7 +31,7 @@ const newsArticles = [
     },
     {
         id: 3,
-        title: "Vận Tải Dương Lê mở rộng mạng lưới ra miền Nam",
+        title: "Vận Tải 62 Dương Lê mở rộng mạng lưới ra miền Nam",
         excerpt: "Chúng tôi vừa khai trương chi nhánh mới tại TP.HCM để phục vụ khách hàng tốt hơn với dịch vụ chất lượng cao...",
         image: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=600&h=400&fit=crop&crop=entropy&auto=format&q=80",
         date: "20/12/2024",
@@ -68,7 +68,7 @@ export default function NewsSection() {
     }
 
     return (
-        <section className="py-20 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 overflow-hidden relative">
+        <section id="news" className="py-20 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 overflow-hidden relative">
             {/* Background decorative elements */}
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute top-32 right-32 w-72 h-72 bg-gradient-to-br from-orange-200/20 to-amber-200/20 rounded-full blur-3xl" />

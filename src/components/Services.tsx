@@ -44,7 +44,7 @@ const services = [
 
 export default function Services() {
     return (
-        <section className="py-20 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 relative overflow-hidden">
+        <section id="services" className="py-20 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 relative overflow-hidden">
             {/* Background Decorative Elements */}
             <div className="absolute inset-0 opacity-20">
                 <div className="absolute top-10 left-10 w-72 h-72 bg-orange-400 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>

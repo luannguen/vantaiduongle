@@ -189,7 +189,7 @@ const detailedCaseStudies = [
         ],
 
         testimonial: {
-            quote: "Dự án chuyển đổi logistics với Vận Tải Dương Lê đã thay đổi hoàn toàn cách chúng tôi vận hành. Không chỉ tiết kiệm chi phí mà còn nâng cao trải nghiệm khách hàng đáng kể.",
+            quote: "Dự án chuyển đổi logistics với Vận Tải 62 Dương Lê đã thay đổi hoàn toàn cách chúng tôi vận hành. Không chỉ tiết kiệm chi phí mà còn nâng cao trải nghiệm khách hàng đáng kể.",
             author: "Ông Nguyễn Minh Tuấn",
             position: "Tổng Giám Đốc ABC Retail Group",
             avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face"
@@ -292,7 +292,7 @@ const detailedCaseStudies = [
         ],
 
         testimonial: {
-            quote: "Cold chain solution của Dương Lê không chỉ đáp ứng mà còn vượt xa các tiêu chuẩn quốc tế. Chúng tôi hoàn toàn yên tâm về chất lượng sản phẩm từ nhà máy đến tay bệnh nhân.",
+            quote: "Cold chain solution của 62 Dương Lê không chỉ đáp ứng mà còn vượt xa các tiêu chuẩn quốc tế. Chúng tôi hoàn toàn yên tâm về chất lượng sản phẩm từ nhà máy đến tay bệnh nhân.",
             author: "Bà Trần Thu Hằng",
             position: "Giám Đốc Chuỗi Cung Ứng XYZ Corp",
             avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b2fd?w=60&h=60&fit=crop&crop=face"
@@ -395,7 +395,7 @@ const detailedCaseStudies = [
         ],
 
         testimonial: {
-            quote: "Partnership với Dương Lê đã transform hoàn toàn fulfillment operations của chúng tôi. Từ marketplace nhỏ, giờ chúng tôi compete được với các giant như Shopee, Lazada.",
+            quote: "Partnership với 62 Dương Lê đã transform hoàn toàn fulfillment operations của chúng tôi. Từ marketplace nhỏ, giờ chúng tôi compete được với các giant như Shopee, Lazada.",
             author: "Ông Lê Đức Anh",
             position: "CEO & Founder DEF Platform",
             avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face"

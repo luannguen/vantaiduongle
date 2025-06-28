@@ -1,5 +1,6 @@
 'use client';
 
+import { COMPANY_INFO } from '@/lib/company-metadata';
 import { motion } from 'framer-motion';
 import { Clock, Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react';
 
@@ -7,19 +8,19 @@ const contactInfo = [
     {
         icon: Phone,
         title: "Hotline 24/7",
-        details: ["0912 345 678", "1900 6789"],
+        details: [COMPANY_INFO.contact.phone.primary, COMPANY_INFO.contact.phone.secondary],
         description: "Liên hệ bất cứ lúc nào"
     },
     {
         icon: Mail,
         title: "Email",
-        details: ["info@vantaiduongle.com", "support@vantaiduongle.com"],
+        details: [COMPANY_INFO.contact.email.primary, COMPANY_INFO.contact.email.support],
         description: "Gửi yêu cầu qua email"
     },
     {
         icon: MapPin,
         title: "Trụ sở chính",
-        details: ["123 Đường Láng, Đống Đa", "Hà Nội, Việt Nam"],
+        details: [COMPANY_INFO.contact.address.street, COMPANY_INFO.contact.address.district + ", " + COMPANY_INFO.contact.address.city],
         description: "Văn phòng làm việc"
     },
     {
@@ -703,7 +704,7 @@ export default function Contact() {
                                         <h4 className="subsection-title text-2xl text-slate-800 mb-3 group-hover:text-orange-600 transition-colors duration-300">
                                             Trụ sở chính
                                         </h4>
-                                        <p className="text-slate-600 mb-4 font-medium text-lg">789 Nguyễn Văn Linh, Quận 7, TP.HCM</p>
+                                        <p className="text-slate-600 mb-4 font-medium text-lg">{COMPANY_INFO.contact.address.full}</p>
                                         <div className="flex items-center justify-center space-x-6 text-sm">
                                             <div className="flex items-center text-green-600">
                                                 <div className="w-3 h-3 bg-green-400 rounded-full mr-2 animate-pulse"></div>
@@ -711,7 +712,7 @@ export default function Contact() {
                                             </div>
                                             <div className="flex items-center text-orange-600">
                                                 <Phone className="w-4 h-4 mr-2" />
-                                                <span className="font-bold">028 7777 8888</span>
+                                                <span className="font-bold">{COMPANY_INFO.contact.phone.primary}</span>
                                             </div>
                                         </div>
                                     </div>

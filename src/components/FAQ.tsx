@@ -7,7 +7,7 @@ import { useState } from 'react'
 const faqs = [
     {
         id: 1,
-        question: "Vận Tải Dương Lê có những loại xe nào?",
+        question: "Vận Tải 62 Dương Lê có những loại xe nào?",
         answer: "Chúng tôi có đầy đủ các loại xe từ 1 tấn đến 10 tấn, bao gồm xe tải thường, xe tải mui bạt, xe tải thùng kín, xe chuyên dụng vận chuyển hàng lạnh và hàng đặc biệt."
     },
     {
@@ -37,7 +37,7 @@ const faqs = [
     },
     {
         id: 7,
-        question: "Thời gian làm việc của Vận Tải Dương Lê?",
+        question: "Thời gian làm việc của Vận Tải 62 Dương Lê?",
         answer: "Chúng tôi làm việc 24/7 để phục vụ khách hàng. Hotline hỗ trợ hoạt động 24h, đặt hàng và thu gom có thể thực hiện vào cuối tuần và ngày lễ."
     },
     {

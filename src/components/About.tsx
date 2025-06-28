@@ -46,7 +46,7 @@ const values = [
 
 export default function About() {
     return (
-        <section className="py-20 relative overflow-hidden bg-[url('/about-bg.jpg')] bg-cover bg-center bg-no-repeat">
+        <section id="about" className="py-20 relative overflow-hidden bg-[url('/about-bg.jpg')] bg-cover bg-center bg-no-repeat">
             {/* Background Overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-slate-900/85 via-blue-900/80 to-indigo-900/85" />
 
@@ -59,11 +59,11 @@ export default function About() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl font-bold text-white mb-4">
-                        Về Vận Tải Dương Lê
+                        Về Vận Tải 62 Dương Lê
                     </h2>
                     <p className="text-xl text-blue-100 max-w-3xl mx-auto">
                         Với hơn 15 năm kinh nghiệm trong lĩnh vực vận tải đường bộ,
-                        Vận Tải Dương Lê đã trở thành đối tác tin cậy của hàng nghìn doanh nghiệp trên toàn quốc.
+                        Vận Tải 62 Dương Lê đã trở thành đối tác tin cậy của hàng nghìn doanh nghiệp trên toàn quốc.
                     </p>
                 </motion.div>
 
@@ -103,12 +103,12 @@ export default function About() {
                         className="bg-white/10 backdrop-blur-sm rounded-2xl p-8"
                     >
                         <h3 className="text-3xl font-bold text-white mb-6">
-                            Câu chuyện của Vận Tải Dương Lê
+                            Câu chuyện của Vận Tải 62 Dương Lê
                         </h3>
                         <div className="space-y-4 text-blue-100">
                             <p>
                                 Bắt đầu từ một công ty vận tải nhỏ với chỉ 5 chiếc xe tải,
-                                Vận Tải Dương Lê đã phát triển thành một trong những công ty vận tải
+                                Vận Tải 62 Dương Lê đã phát triển thành một trong những công ty vận tải
                                 hàng đầu Việt Nam với mạng lưới phủ sóng toàn quốc.
                             </p>
                             <p>
@@ -118,7 +118,7 @@ export default function About() {
                             </p>
                             <p>
                                 Với đội ngũ hơn 1000 nhân viên tận tâm và hệ thống xe tải hiện đại,
-                                Vận Tải Dương Lê tự tin mang đến cho khách hàng trải nghiệm vận chuyển
+                                Vận Tải 62 Dương Lê tự tin mang đến cho khách hàng trải nghiệm vận chuyển
                                 tốt nhất từ Bắc vào Nam, góp phần kết nối mọi miền đất nước.
                             </p>
                         </div>

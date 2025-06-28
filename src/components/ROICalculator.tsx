@@ -135,7 +135,7 @@ export default function ROICalculator() {
                         </h2>
                     </div>
                     <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Khám phá mức tiết kiệm chi phí logistics và ROI khi chuyển đổi sang Vận Tải Dương Lê.
+                        Khám phá mức tiết kiệm chi phí logistics và ROI khi chuyển đổi sang Vận Tải 62 Dương Lê.
                         Công cụ tính toán chính xác dựa trên dữ liệu thực tế từ 1000+ đối tác.
                     </p>
                 </motion.div>
@@ -315,7 +315,7 @@ export default function ROICalculator() {
                                                 <p className="text-xl font-bold">{formatCurrency(result.currentCost)}</p>
                                             </div>
                                             <div>
-                                                <p className="text-sm opacity-80">Chi phí với Dương Lê</p>
+                                                <p className="text-sm opacity-80">Chi phí với 62 Dương Lê</p>
                                                 <p className="text-xl font-bold text-green-200">{formatCurrency(result.proposedCost)}</p>
                                             </div>
                                         </div>
