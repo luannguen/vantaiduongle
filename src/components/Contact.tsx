@@ -4,27 +4,194 @@ import { COMPANY_INFO } from '@/lib/company-metadata';
 import { motion } from 'framer-motion';
 import { Clock, Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react';
 
+// Component cho icon phone với hiệu ứng chuông
+const AnimatedPhone = () => (
+    <div className="relative">
+        <motion.div
+            animate={{
+                rotate: [0, 8, -8, 8, -8, 0],
+            }}
+            transition={{
+                duration: 0.6,
+                repeat: Infinity,
+                repeatDelay: 2,
+                ease: "easeInOut"
+            }}
+        >
+            <Phone className="w-8 h-8 text-orange-600" />
+        </motion.div>
+        {/* Sóng âm thanh */}
+        <motion.div
+            className="absolute -top-1 -right-1"
+            animate={{
+                scale: [0, 1.5, 0],
+                opacity: [0, 0.8, 0]
+            }}
+            transition={{
+                duration: 0.8,
+                repeat: Infinity,
+                repeatDelay: 1.8,
+                ease: "easeOut"
+            }}
+        >
+            <div className="w-3 h-3 border-2 border-orange-400 rounded-full" />
+        </motion.div>
+        <motion.div
+            className="absolute -top-2 -right-2"
+            animate={{
+                scale: [0, 2, 0],
+                opacity: [0, 0.4, 0]
+            }}
+            transition={{
+                duration: 0.8,
+                repeat: Infinity,
+                repeatDelay: 1.8,
+                ease: "easeOut",
+                delay: 0.2
+            }}
+        >
+            <div className="w-4 h-4 border border-orange-300 rounded-full" />
+        </motion.div>
+    </div>
+)
+
+// Component cho icon email với hiệu ứng gửi
+const AnimatedMail = () => (
+    <div className="relative">
+        <motion.div
+            animate={{
+                y: [0, -2, 0],
+                rotateZ: [0, 2, -2, 0]
+            }}
+            transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+            }}
+        >
+            <Mail className="w-8 h-8 text-orange-600" />
+        </motion.div>
+        {/* Hiệu ứng envelope */}
+        <motion.div
+            className="absolute -top-1 -left-1"
+            animate={{
+                scale: [0, 1.2, 0],
+                opacity: [0, 0.6, 0],
+                x: [0, 3, 6]
+            }}
+            transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeOut"
+            }}
+        >
+            <div className="text-xs text-orange-400">✉️</div>
+        </motion.div>
+    </div>
+)
+
+// Component cho icon map pin với hiệu ứng bounce
+const AnimatedMapPin = () => (
+    <motion.div
+        animate={{
+            y: [0, -4, 0],
+        }}
+        transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut"
+        }}
+    >
+        <MapPin className="w-8 h-8 text-orange-600" />
+    </motion.div>
+)
+
+// Component cho icon đồng hồ với kim quay
+const AnimatedClock = () => (
+    <div className="relative inline-block w-8 h-8">
+        <Clock className="w-8 h-8 text-orange-600" />
+        {/* Kim giờ */}
+        <motion.div
+            className="absolute w-0.5 bg-orange-800 rounded-full origin-bottom"
+            style={{
+                height: '8px',
+                bottom: '50%',
+                left: '50%',
+                marginLeft: '-1px',
+                transformOrigin: "bottom center"
+            }}
+            animate={{ rotate: 360 }}
+            transition={{
+                duration: 12,
+                repeat: Infinity,
+                ease: "linear"
+            }}
+        />
+        {/* Kim phút */}
+        <motion.div
+            className="absolute w-0.5 bg-orange-600 rounded-full origin-bottom"
+            style={{
+                height: '12px',
+                bottom: '50%',
+                left: '50%',
+                marginLeft: '-1px',
+                transformOrigin: "bottom center"
+            }}
+            animate={{ rotate: 360 }}
+            transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "linear"
+            }}
+        />
+        {/* Kim giây */}
+        <motion.div
+            className="absolute w-px bg-red-500 rounded-full origin-bottom"
+            style={{
+                height: '14px',
+                bottom: '50%',
+                left: '50%',
+                marginLeft: '-0.5px',
+                transformOrigin: "bottom center"
+            }}
+            animate={{ rotate: 360 }}
+            transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "linear"
+            }}
+        />
+        {/* Tâm đồng hồ */}
+        <div className="absolute w-1.5 h-1.5 bg-orange-800 rounded-full z-10"
+            style={{
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)'
+            }} />
+    </div>
+)
+
 const contactInfo = [
     {
-        icon: Phone,
+        icon: AnimatedPhone,
         title: "Hotline 24/7",
         details: [COMPANY_INFO.contact.phone.primary, COMPANY_INFO.contact.phone.secondary],
         description: "Liên hệ bất cứ lúc nào"
     },
     {
-        icon: Mail,
+        icon: AnimatedMail,
         title: "Email",
         details: [COMPANY_INFO.contact.email.primary, COMPANY_INFO.contact.email.support],
         description: "Gửi yêu cầu qua email"
     },
     {
-        icon: MapPin,
+        icon: AnimatedMapPin,
         title: "Trụ sở chính",
         details: [COMPANY_INFO.contact.address.street, COMPANY_INFO.contact.address.district + ", " + COMPANY_INFO.contact.address.city],
         description: "Văn phòng làm việc"
     },
     {
-        icon: Clock,
+        icon: AnimatedClock,
         title: "Giờ làm việc",
         details: ["Thứ 2 - Chủ nhật", "24/7 phục vụ"],
         description: "Luôn sẵn sàng hỗ trợ"
@@ -159,7 +326,7 @@ export default function Contact() {
                                 whileHover={{ rotate: 10, scale: 1.1 }}
                                 transition={{ type: "spring", stiffness: 400 }}
                             >
-                                <info.icon className="w-8 h-8 text-orange-600" />
+                                <info.icon />
                             </motion.div>
                             <h3 className="text-lg font-bold text-gray-900 mb-2 relative z-10">{info.title}</h3>
                             <div className="space-y-1 mb-3 relative z-10">

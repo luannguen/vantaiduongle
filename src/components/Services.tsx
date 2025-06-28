@@ -3,39 +3,295 @@
 import { motion } from 'framer-motion'
 import { Clock, MapPin, Package, Phone, Shield, Truck } from 'lucide-react'
 
+// Component cho icon xe tải với hiệu ứng chạy
+const AnimatedTruck = () => (
+    <div className="relative">
+        <motion.div
+            animate={{
+                x: [0, 2, 0, -1, 0],
+                y: [0, -0.5, 0, 0.5, 0]
+            }}
+            transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+            }}
+        >
+            <Truck className="w-8 h-8 text-orange-600" />
+        </motion.div>
+        {/* Khói từ ống xả */}
+        <motion.div
+            className="absolute -top-1 -right-1"
+            animate={{
+                opacity: [0.3, 0.7, 0.3],
+                scale: [0.8, 1.2, 0.8],
+                x: [0, 2, 4]
+            }}
+            transition={{
+                duration: 1,
+                repeat: Infinity,
+                ease: "easeOut"
+            }}
+        >
+            <div className="text-xs text-gray-400">💨</div>
+        </motion.div>
+    </div>
+)
+
+// Component cho icon đồng hồ với kim quay
+const AnimatedClock = () => (
+    <div className="relative inline-block w-8 h-8">
+        <Clock className="w-8 h-8 text-orange-600" />
+        {/* Kim giờ */}
+        <motion.div
+            className="absolute w-0.5 bg-orange-800 rounded-full origin-bottom"
+            style={{
+                height: '8px',
+                bottom: '50%',
+                left: '50%',
+                marginLeft: '-1px',
+                transformOrigin: "bottom center"
+            }}
+            animate={{ rotate: 360 }}
+            transition={{
+                duration: 12,
+                repeat: Infinity,
+                ease: "linear"
+            }}
+        />
+        {/* Kim phút */}
+        <motion.div
+            className="absolute w-0.5 bg-orange-600 rounded-full origin-bottom"
+            style={{
+                height: '12px',
+                bottom: '50%',
+                left: '50%',
+                marginLeft: '-1px',
+                transformOrigin: "bottom center"
+            }}
+            animate={{ rotate: 360 }}
+            transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "linear"
+            }}
+        />
+        {/* Kim giây */}
+        <motion.div
+            className="absolute w-px bg-red-500 rounded-full origin-bottom"
+            style={{
+                height: '14px',
+                bottom: '50%',
+                left: '50%',
+                marginLeft: '-0.5px',
+                transformOrigin: "bottom center"
+            }}
+            animate={{ rotate: 360 }}
+            transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "linear"
+            }}
+        />
+        {/* Tâm đồng hồ */}
+        <div className="absolute w-1.5 h-1.5 bg-orange-800 rounded-full z-10"
+            style={{
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)'
+            }} />
+    </div>
+)
+
+// Component cho icon shield với hiệu ứng bảo vệ
+const AnimatedShield = () => (
+    <div className="relative">
+        <motion.div
+            animate={{
+                scale: [1, 1.05, 1],
+            }}
+            transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+            }}
+        >
+            <Shield className="w-8 h-8 text-orange-600" />
+        </motion.div>
+        {/* Hiệu ứng sóng bảo vệ */}
+        <motion.div
+            className="absolute inset-0 border-2 border-orange-300 rounded-full"
+            animate={{
+                scale: [1, 1.8, 1],
+                opacity: [0.8, 0, 0.8]
+            }}
+            transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeOut"
+            }}
+        />
+        <motion.div
+            className="absolute inset-0 border border-orange-200 rounded-full"
+            animate={{
+                scale: [1, 2.2, 1],
+                opacity: [0.6, 0, 0.6]
+            }}
+            transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeOut",
+                delay: 0.5
+            }}
+        />
+    </div>
+)
+
+// Component cho icon map pin với hiệu ứng bounce
+const AnimatedMapPin = () => (
+    <motion.div
+        animate={{
+            y: [0, -4, 0],
+        }}
+        transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut"
+        }}
+    >
+        <MapPin className="w-8 h-8 text-orange-600" />
+    </motion.div>
+)
+
+// Component cho icon phone với hiệu ứng chuông
+const AnimatedPhone = () => (
+    <div className="relative">
+        <motion.div
+            animate={{
+                rotate: [0, 8, -8, 8, -8, 0],
+            }}
+            transition={{
+                duration: 0.6,
+                repeat: Infinity,
+                repeatDelay: 2,
+                ease: "easeInOut"
+            }}
+        >
+            <Phone className="w-8 h-8 text-orange-600" />
+        </motion.div>
+        {/* Sóng âm thanh */}
+        <motion.div
+            className="absolute -top-1 -right-1"
+            animate={{
+                scale: [0, 1.5, 0],
+                opacity: [0, 0.8, 0]
+            }}
+            transition={{
+                duration: 0.8,
+                repeat: Infinity,
+                repeatDelay: 1.8,
+                ease: "easeOut"
+            }}
+        >
+            <div className="w-3 h-3 border-2 border-orange-400 rounded-full" />
+        </motion.div>
+        <motion.div
+            className="absolute -top-2 -right-2"
+            animate={{
+                scale: [0, 2, 0],
+                opacity: [0, 0.4, 0]
+            }}
+            transition={{
+                duration: 0.8,
+                repeat: Infinity,
+                repeatDelay: 1.8,
+                ease: "easeOut",
+                delay: 0.2
+            }}
+        >
+            <div className="w-4 h-4 border border-orange-300 rounded-full" />
+        </motion.div>
+    </div>
+)
+
+// Component cho icon package với hiệu ứng đóng gói
+const AnimatedPackage = () => (
+    <div className="relative">
+        <motion.div
+            animate={{
+                y: [0, -2, 0],
+                rotateY: [0, 10, -10, 0]
+            }}
+            transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+            }}
+        >
+            <Package className="w-8 h-8 text-orange-600" />
+        </motion.div>
+        {/* Băng keo đóng gói */}
+        <motion.div
+            className="absolute top-1/2 left-0 right-0 h-0.5 bg-orange-400"
+            initial={{ scaleX: 0 }}
+            animate={{
+                scaleX: [0, 1, 1, 0],
+            }}
+            transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+            }}
+        />
+        <motion.div
+            className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-orange-400"
+            initial={{ scaleY: 0 }}
+            animate={{
+                scaleY: [0, 1, 1, 0],
+            }}
+            transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.5
+            }}
+        />
+    </div>
+)
+
 const services = [
     {
-        icon: Truck,
+        icon: AnimatedTruck,
         title: "Vận chuyển hàng hóa",
         description: "Dịch vụ vận chuyển hàng hóa an toàn, nhanh chóng từ Bắc vào Nam với đội xe đa dạng từ 1-10 tấn.",
         features: ["Đa dạng loại xe", "Tài xế kinh nghiệm", "Theo dõi hành trình"]
     },
     {
-        icon: Clock,
+        icon: AnimatedClock,
         title: "Giao hàng nhanh",
         description: "Cam kết thời gian giao hàng nhanh nhất, đúng hẹn với hệ thống logistics hiện đại.",
         features: ["Giao hàng trong ngày", "Theo dõi real-time", "Báo cáo tiến độ"]
     },
     {
-        icon: Shield,
+        icon: AnimatedShield,
         title: "Bảo hiểm hàng hóa",
         description: "Toàn bộ hàng hóa được bảo hiểm 100% giá trị, đảm bảo an toàn tuyệt đối.",
         features: ["Bảo hiểm toàn diện", "Bồi thường nhanh chóng", "Quy trình minh bạch"]
     },
     {
-        icon: MapPin,
+        icon: AnimatedMapPin,
         title: "Phủ sóng toàn quốc",
         description: "Mạng lưới vận chuyển bao phủ toàn quốc, từ các thành phố lớn đến vùng sâu vùng xa.",
         features: ["63 tỉnh thành", "Mạng lưới rộng khắp", "Kho bãi chiến lược"]
     },
     {
-        icon: Phone,
+        icon: AnimatedPhone,
         title: "Hỗ trợ 24/7",
         description: "Đội ngũ chăm sóc khách hàng chuyên nghiệp, sẵn sàng hỗ trợ 24/7.",
         features: ["Hotline 24/7", "Tư vấn miễn phí", "Xử lý khiếu nại nhanh"]
     },
     {
-        icon: Package,
+        icon: AnimatedPackage,
         title: "Đóng gói chuyên nghiệp",
         description: "Dịch vụ đóng gói hàng hóa chuyên nghiệp, đảm bảo an toàn trong quá trình vận chuyển.",
         features: ["Vật liệu chất lượng", "Kỹ thuật chuyên nghiệp", "Tùy chỉnh theo yêu cầu"]
@@ -122,7 +378,7 @@ export default function Services() {
                                     transition={{ type: "spring", stiffness: 300 }}
                                 >
                                     <div className="bg-gradient-to-br from-orange-100 to-amber-100 p-4 rounded-xl mr-4 group-hover:from-orange-200 group-hover:to-amber-200 transition-all duration-300 shadow-md">
-                                        <service.icon className="w-8 h-8 text-orange-600" />
+                                        <service.icon />
                                     </div>
                                     <h3 className="text-xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors duration-300">
                                         {service.title}
@@ -179,7 +435,7 @@ export default function Services() {
                                 transition={{ delay: 0.2 }}
                                 viewport={{ once: true }}
                             >
-                                Không biết chọn loại xe nào phù hợp?
+                                Bạn là doanh nghiệp cần vận chuyển hàng ngày?
                             </motion.h3>
 
                             <motion.p
@@ -189,7 +445,7 @@ export default function Services() {
                                 transition={{ delay: 0.3 }}
                                 viewport={{ once: true }}
                             >
-                                Đội ngũ chuyên gia của chúng tôi sẽ tư vấn loại xe tối ưu nhất cho hàng hóa của bạn
+                                Trở thành đối tác để nhận <strong>giảm giá đến 30%</strong> và tận hưởng nhiều quyền lợi đặc biệt
                             </motion.p>
 
                             <motion.div
@@ -200,20 +456,52 @@ export default function Services() {
                                 viewport={{ once: true }}
                             >
                                 <motion.button
-                                    className="bg-white text-orange-600 px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                                    className="bg-white text-orange-600 px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-yellow-300"
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
+                                    onClick={() => {
+                                        document.getElementById('partnership-booster')?.scrollIntoView({ behavior: 'smooth' })
+                                    }}
                                 >
-                                    Tư vấn miễn phí
+                                    🤝 Đăng ký đối tác ngay
                                 </motion.button>
 
                                 <motion.button
                                     className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-orange-600 transition-all duration-300"
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
+                                    onClick={() => {
+                                        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                                    }}
                                 >
-                                    Gọi ngay: 0912 345 678
+                                    💬 Tư vấn miễn phí
                                 </motion.button>
+                            </motion.div>
+
+                            {/* Partnership Benefits */}
+                            <motion.div
+                                className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5 }}
+                                viewport={{ once: true }}
+                            >
+                                <div className="bg-white/15 backdrop-blur-sm rounded-xl p-3">
+                                    <div className="text-2xl font-bold">30%</div>
+                                    <div className="text-xs text-orange-100">Giảm giá tối đa</div>
+                                </div>
+                                <div className="bg-white/15 backdrop-blur-sm rounded-xl p-3">
+                                    <div className="text-2xl font-bold">24/7</div>
+                                    <div className="text-xs text-orange-100">Hỗ trợ riêng</div>
+                                </div>
+                                <div className="bg-white/15 backdrop-blur-sm rounded-xl p-3">
+                                    <div className="text-2xl font-bold">VIP</div>
+                                    <div className="text-xs text-orange-100">Ưu tiên cao</div>
+                                </div>
+                                <div className="bg-white/15 backdrop-blur-sm rounded-xl p-3">
+                                    <div className="text-2xl font-bold">+45%</div>
+                                    <div className="text-xs text-orange-100">Tăng hiệu quả</div>
+                                </div>
                             </motion.div>
                         </div>
                     </div>

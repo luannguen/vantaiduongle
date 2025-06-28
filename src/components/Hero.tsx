@@ -1,7 +1,6 @@
 'use client'
 
 import { useLanguage } from '@/contexts/LanguageContext'
-import { COMPANY_INFO } from '@/lib/company-metadata'
 import { motion } from 'framer-motion'
 import { ArrowRight, Clock, MapPin, Shield } from 'lucide-react'
 import Image from 'next/image'
@@ -64,6 +63,10 @@ export default function Hero() {
                             transition={{ duration: 0.8, delay: 0.8 }}
                         >
                             ✅ Xe tải từ 1-10 tấn | 🚛 Vận chuyển Bắc - Nam | 🔒 Bảo hiểm 100% | ⚡ Giao hàng nhanh 24-48h
+                            <br />
+                            <span className="bg-gradient-to-r from-yellow-300 to-orange-300 text-orange-900 px-3 py-1 rounded-full text-lg font-bold animate-pulse">
+                                🎉 Đặc biệt: Tặng 20% phí vận chuyển cho đối tác mới!
+                            </span>
                         </motion.p>
 
                         {/* Features */}
@@ -108,20 +111,40 @@ export default function Hero() {
                             <motion.div
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
+                                className="flex-1"
                             >
-                                <Link href="/#contact" className="bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 px-8 py-4 rounded-lg hover:from-amber-300 hover:to-orange-300 transition-all duration-300 font-bold text-lg flex items-center justify-center hover-lift shadow-lg shadow-amber-500/25">
-                                    {t('getQuote')}
+                                <Link href="/#partnership-booster" className="bg-gradient-to-r from-green-400 to-emerald-400 text-slate-900 px-8 py-4 rounded-lg hover:from-green-300 hover:to-emerald-300 transition-all duration-300 font-bold text-lg flex items-center justify-center hover-lift shadow-lg shadow-green-500/25 border-2 border-yellow-300">
+                                    🤝 Đăng ký đối tác
                                     <ArrowRight className="w-5 h-5 ml-2" />
                                 </Link>
                             </motion.div>
                             <motion.div
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
+                                className="flex-1"
                             >
-                                <Link href={`tel:${COMPANY_INFO.contact.phone.primary.replace(/\./g, '')}`} className="border-2 border-white/80 text-white px-8 py-4 rounded-lg hover:bg-white/10 hover:border-white transition-all duration-300 font-semibold text-lg hover-lift backdrop-blur-sm block text-center">
-                                    {t('callNow')}
+                                <Link href="/#contact" className="bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 px-8 py-4 rounded-lg hover:from-amber-300 hover:to-orange-300 transition-all duration-300 font-bold text-lg flex items-center justify-center hover-lift shadow-lg shadow-amber-500/25">
+                                    {t('getQuote')}
+                                    <ArrowRight className="w-5 h-5 ml-2" />
                                 </Link>
                             </motion.div>
+                        </motion.div>
+
+                        {/* Partnership Call-out */}
+                        <motion.div
+                            className="mt-6 text-center"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.8, delay: 1.4 }}
+                        >
+                            <div className="bg-gradient-to-r from-yellow-400/20 to-orange-400/20 backdrop-blur-sm border border-yellow-300/50 rounded-xl px-6 py-3 inline-block">
+                                <div className="flex items-center text-yellow-100">
+                                    <div className="w-2 h-2 bg-yellow-400 rounded-full mr-3 animate-pulse"></div>
+                                    <span className="text-sm font-semibold">
+                                        🚀 Mở cửa tuyển đối tác mới: Chỉ 50 suất trong tháng 12!
+                                    </span>
+                                </div>
+                            </div>
                         </motion.div>
                     </motion.div>
 

@@ -1,5 +1,6 @@
 'use client'
 
+import { COMPANY_INFO } from '@/lib/company-metadata'
 import { motion } from 'framer-motion'
 import {
     ArrowRight,
@@ -433,23 +434,23 @@ export default function PartnershipOnboarding() {
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center">
                         <motion.a
-                            href="tel:0912345678"
+                            href={`tel:${COMPANY_INFO.contact.phone.primary.replace(/\./g, '')}`}
                             className="flex items-center justify-center bg-green-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-600 transition-all duration-300"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
                             <Phone className="w-5 h-5 mr-2" />
-                            Gọi ngay: 0912 345 678
+                            Gọi ngay: {COMPANY_INFO.contact.phone.primary}
                         </motion.a>
 
                         <motion.a
-                            href="mailto:partner@trucktransport.vn"
+                            href={`mailto:${COMPANY_INFO.contact.email.business}`}
                             className="flex items-center justify-center bg-blue-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-600 transition-all duration-300"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
                             <Mail className="w-5 h-5 mr-2" />
-                            Email: partner@trucktransport.vn
+                            Email: {COMPANY_INFO.contact.email.business}
                         </motion.a>
                     </div>
                 </motion.div>
