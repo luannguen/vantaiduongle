@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react'
 // Animated Counter Hook
 const useCountUp = (end: number, duration: number = 2000, startAnimation: boolean = false) => {
     const [count, setCount] = useState(0)
-    const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
         if (!startAnimation) return
@@ -50,10 +49,9 @@ const AnimatedMetricValue = ({ value, isVisible }: { value: string, isVisible: b
 }
 
 // Progress Bar Chart Component
-const ProgressChart = ({ before, after, category, improvement }: {
+const ProgressChart = ({ before, after, improvement }: {
     before: string,
     after: string,
-    category: string,
     improvement: string
 }) => {
     const beforeNum = parseFloat(before.replace(/[^\d.]/g, ''))
@@ -760,7 +758,6 @@ export default function DetailedCaseStudies() {
                                             <ProgressChart
                                                 before={metric.before}
                                                 after={metric.after}
-                                                category={metric.category}
                                                 improvement={metric.improvement}
                                             />
 
