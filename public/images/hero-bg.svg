@@ -1,0 +1,18 @@
+<!-- SVG placeholder for hero background -->
+<svg width="1200" height="600" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#1E40AF;stop-opacity:0.9" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#grad1)"/>
+  <!-- Road -->
+  <path d="M0 400 Q600 350 1200 400 L1200 450 Q600 400 0 450 Z" fill="#374151" opacity="0.3"/>
+  <!-- Mountains -->
+  <path d="M0 300 L200 200 L400 250 L600 180 L800 220 L1000 160 L1200 200 L1200 600 L0 600 Z" fill="#1F2937" opacity="0.2"/>
+  <!-- Clouds -->
+  <ellipse cx="200" cy="100" rx="80" ry="30" fill="white" opacity="0.1"/>
+  <ellipse cx="500" cy="80" rx="100" ry="40" fill="white" opacity="0.1"/>
+  <ellipse cx="900" cy="120" rx="90" ry="35" fill="white" opacity="0.1"/>
+</svg>
