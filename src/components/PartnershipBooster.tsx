@@ -17,7 +17,7 @@ import {
     Users,
     Zap
 } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function PartnershipBooster() {
     const [timeLeft] = useState({
@@ -28,6 +28,20 @@ export default function PartnershipBooster() {
     })
 
     const [currentPromo] = useState(0)
+    const [currentUrgencyIndex, setCurrentUrgencyIndex] = useState(0)
+    const [isClient, setIsClient] = useState(false)
+
+    // Client-side only effect to prevent hydration mismatch
+    useEffect(() => {
+        setIsClient(true)
+
+        // Cycle through urgency signals on client side only
+        const interval = setInterval(() => {
+            setCurrentUrgencyIndex(prev => (prev + 1) % 5) // urgencySignals has 5 items
+        }, 3000)
+
+        return () => clearInterval(interval)
+    }, [])
 
     const limitedOffers = [
         {
@@ -148,7 +162,7 @@ export default function PartnershipBooster() {
                     >
                         <div className="flex items-center text-sm text-gray-700">
                             <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-                            {urgencySignals[Math.floor(Date.now() / 3000) % urgencySignals.length]}
+                            {isClient ? urgencySignals[currentUrgencyIndex] : urgencySignals[0]}
                         </div>
                     </motion.div>
                 </motion.div>

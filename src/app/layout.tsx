@@ -3,6 +3,7 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import SocialWidget from '@/components/SocialWidget';
 import StickyCTA from '@/components/StickyCTA';
+import TruckCompanion from '@/components/TruckCompanion';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { COMPANY_INFO } from '@/lib/company-metadata';
 import type { Metadata } from "next";
@@ -42,6 +43,7 @@ export default function RootLayout({
       >
         <LanguageProvider>
           <Header />
+          <TruckCompanion />
           {children}
           <Footer />
           <SocialWidget />

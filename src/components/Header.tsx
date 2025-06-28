@@ -10,11 +10,21 @@ import LanguageSwitcher from './LanguageSwitcher'
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
+    const [isHidden, setIsHidden] = useState(false)
     const { t } = useLanguage()
 
     useEffect(() => {
+        let lastScrollY = window.scrollY
+
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50)
+            const currentScrollY = window.scrollY
+
+            setIsScrolled(currentScrollY > 50)
+
+            // Hide header when scrolled down significantly
+            setIsHidden(currentScrollY > 300 && currentScrollY > lastScrollY)
+
+            lastScrollY = currentScrollY
         }
 
         window.addEventListener('scroll', handleScroll)
@@ -22,9 +32,12 @@ export default function Header() {
     }, [])
 
     return (
-        <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled
-            ? 'bg-gradient-to-r from-orange-50/95 via-amber-50/95 to-yellow-50/95 backdrop-blur-lg shadow-2xl border-b border-orange-200/30'
-            : 'bg-gradient-to-r from-orange-50 via-amber-50 to-yellow-50 shadow-xl border-b border-orange-100/50'
+        <header className={`sticky top-0 z-50 transition-all duration-500 ${isHidden
+                ? '-translate-y-full opacity-0'
+                : 'translate-y-0 opacity-100'
+            } ${isScrolled
+                ? 'bg-gradient-to-r from-orange-50/95 via-amber-50/95 to-yellow-50/95 backdrop-blur-lg shadow-2xl border-b border-orange-200/30'
+                : 'bg-gradient-to-r from-orange-50 via-amber-50 to-yellow-50 shadow-xl border-b border-orange-100/50'
             }`}>
             {/* Background decorative elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">

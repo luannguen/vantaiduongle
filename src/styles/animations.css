@@ -143,6 +143,90 @@
     }
 }
 
+/* Truck Companion Animations */
+@keyframes truckBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes wheelSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes exhaust {
+    0% {
+        opacity: 0.7;
+        transform: translateX(0) scale(0.8);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: translateX(-8px) scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-15px) scale(0.6);
+    }
+}
+
+@keyframes speedLines {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes truckEntry {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(-10deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes menuSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 /* Animation Classes */
 .animate-slideDown {
     animation: slideDown 0.3s ease-out;
@@ -186,4 +270,48 @@
 
 .animate-spin-slow {
     animation: rotate 3s linear infinite;
+}
+
+/* Animation Classes for Truck */
+.animate-truck-bounce {
+    animation: truckBounce 1s ease-in-out infinite;
+}
+
+.animate-wheel-spin {
+    animation: wheelSpin 0.5s linear infinite;
+}
+
+.animate-exhaust {
+    animation: exhaust 0.8s ease-out infinite;
+}
+
+.animate-speed-lines {
+    animation: speedLines 0.3s ease-out infinite;
+}
+
+.animate-truck-entry {
+    animation: truckEntry 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.animate-menu-slide {
+    animation: menuSlideIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Hover Effects */
+.truck-hover-effect {
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.truck-hover-effect:hover {
+    transform: scale(1.1) rotate(2deg);
+    filter: drop-shadow(0 8px 16px rgba(249, 115, 22, 0.4));
+}
+
+/* Scroll-based animations */
+.truck-fast-scroll {
+    animation: truckBounce 0.3s ease-in-out infinite, wheelSpin 0.2s linear infinite;
+}
+
+.truck-idle {
+    animation: float 2s ease-in-out infinite;
 }
