@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vận Tải Dương Lê - Truck Transport Website
 
-## Getting Started
+## 🚛 Giới thiệu
 
-First, run the development server:
+Website vận tải chuyên nghiệp được xây dựng với Next.js 15, cung cấp dịch vụ vận chuyển hàng hóa bằng xe tải từ 1-10 tấn, phủ sóng toàn quốc từ Bắc vào Nam.
+
+## ✨ Tính năng nổi bật
+
+- **Thiết kế responsive** hoàn toàn cho mọi thiết bị
+- **Animation mượt mà** với Framer Motion
+- **Tính toán giá và ROI** tự động
+- **Testimonial video** từ CEO/Giám đốc
+- **Case study chi tiết** với biểu đồ thống kê
+- **Biểu đồ tăng trưởng** với animation số đếm
+- **Tích hợp đa ngôn ngữ** (Tiếng Việt/English)
+- **Live chat** hỗ trợ khách hàng
+- **Theo dõi đơn hàng** real-time
+
+## 🛠 Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Animation**: Framer Motion
+- **Icons**: Lucide React
+- **Fonts**: Inter với hỗ trợ Vietnamese
+- **Deployment**: Vercel Ready
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm hoặc yarn
+- Git
+
+### Installation
 
 ```bash
+# Clone repository
+git clone https://github.com/[username]/vantaiduongle.git
+
+# Vào thư mục dự án
+cd vantaiduongle
+
+# Cài đặt dependencies
+npm install
+
+# Chạy development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Mở [http://localhost:3000](http://localhost:3000) để xem website.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🌐 Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Vercel (Recommended)
 
-## Learn More
+1. Tạo repository trên GitHub với tên `vantaiduongle`
+2. Push code lên GitHub
+3. Kết nối với Vercel account
+4. Import project từ GitHub
+5. Deploy tự động
 
-To learn more about Next.js, take a look at the following resources:
+### Manual Steps
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Tạo GitHub Repository:**
+   - Vào [github.com](https://github.com)
+   - Click "New repository"
+   - Repository name: `vantaiduongle`
+   - Chọn Public
+   - Click "Create repository"
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Push code:**
 
-## Deploy on Vercel
+   ```bash
+   git remote set-url origin https://github.com/[YOUR_USERNAME]/vantaiduongle.git
+   git push -u origin main
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Deploy với Vercel:**
+   - Vào [vercel.com](https://vercel.com)
+   - Click "New Project"
+   - Import từ GitHub repository `vantaiduongle`
+   - Click "Deploy"
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📈 Performance
+
+- Next.js 15 App Router
+- Automatic code splitting
+- Image optimization
+- Font optimization
+- SEO optimized
+
+---
+
+**Developed with ❤️ for professional truck transportation business**
