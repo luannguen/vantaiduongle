@@ -38,7 +38,7 @@ Website vận tải chuyên nghiệp được xây dựng với Next.js 15, cung
 
 ```bash
 # Clone repository
-git clone https://github.com/[username]/vantaiduongle.git
+git clone https://github.com/luannguen/vantaiduongle.git
 
 # Vào thư mục dự án
 cd vantaiduongle
@@ -74,7 +74,7 @@ Mở [http://localhost:3000](http://localhost:3000) để xem website.
 2. **Push code:**
 
    ```bash
-   git remote set-url origin https://github.com/[YOUR_USERNAME]/vantaiduongle.git
+   git remote set-url origin https://github.com/luannguen/vantaiduongle.git
    git push -u origin main
    ```
 
