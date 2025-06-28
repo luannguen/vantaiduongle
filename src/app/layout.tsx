@@ -6,6 +6,7 @@ import StickyCTA from '@/components/StickyCTA';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import "../styles/animations.css";
 import "./globals.css";
 
 const inter = Inter({
