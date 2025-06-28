@@ -1,5 +1,6 @@
 'use client'
 
+import { COMPANY_INFO } from '@/lib/company-metadata'
 import { Facebook, MessageCircle, Phone, Youtube } from 'lucide-react'
 import { useState } from 'react'
 
@@ -10,28 +11,28 @@ export default function SocialWidget() {
         {
             name: 'Facebook',
             icon: Facebook,
-            url: 'https://facebook.com/vantaiduongle',
+            url: COMPANY_INFO.social.facebook.url,
             bgColor: 'bg-blue-600 hover:bg-blue-700',
             hoverBgColor: 'hover:bg-blue-50'
         },
         {
             name: 'Zalo',
             icon: MessageCircle,
-            url: 'https://zalo.me/0912345678',
+            url: COMPANY_INFO.messaging.zalo.url,
             bgColor: 'bg-blue-500 hover:bg-blue-600',
             hoverBgColor: 'hover:bg-blue-50'
         },
         {
             name: 'YouTube',
             icon: Youtube,
-            url: 'https://youtube.com/@vantaiduongle',
+            url: COMPANY_INFO.social.youtube.url,
             bgColor: 'bg-red-600 hover:bg-red-700',
             hoverBgColor: 'hover:bg-red-50'
         },
         {
             name: 'Hotline',
             icon: Phone,
-            url: 'tel:0912345678',
+            url: `tel:${COMPANY_INFO.contact.phone.primary.replace(/\./g, '')}`,
             bgColor: 'bg-green-600 hover:bg-green-700',
             hoverBgColor: 'hover:bg-green-50'
         }
@@ -94,7 +95,7 @@ export default function SocialWidget() {
                                 <span className="text-sm font-medium">Chat qua Messenger</span>
                             </a>
                             <a
-                                href="https://zalo.me/0912345678"
+                                href={COMPANY_INFO.messaging.zalo.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center p-2 rounded-lg hover:bg-blue-50 transition-colors"
@@ -105,13 +106,13 @@ export default function SocialWidget() {
                                 <span className="text-sm font-medium">Chat qua Zalo</span>
                             </a>
                             <a
-                                href="tel:0912345678"
+                                href={`tel:${COMPANY_INFO.contact.phone.primary.replace(/\./g, '')}`}
                                 className="flex items-center p-2 rounded-lg hover:bg-green-50 transition-colors"
                             >
                                 <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center mr-3">
                                     <Phone className="w-4 h-4 text-white" />
                                 </div>
-                                <span className="text-sm font-medium">Gọi ngay: 0912 345 678</span>
+                                <span className="text-sm font-medium">Gọi ngay: {COMPANY_INFO.contact.phone.primary}</span>
                             </a>
                         </div>
                     </div>

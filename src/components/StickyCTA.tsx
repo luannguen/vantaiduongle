@@ -1,7 +1,9 @@
 'use client'
 
+import { COMPANY_INFO } from '@/lib/company-metadata'
 import { motion } from 'framer-motion'
 import { Calculator, MessageCircle, Phone } from 'lucide-react'
+import Link from 'next/link'
 
 export default function StickyCTA() {
     return (
@@ -12,32 +14,49 @@ export default function StickyCTA() {
             className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-200 p-4 z-40 lg:hidden"
         >
             <div className="flex justify-center gap-3 max-w-sm mx-auto">
-                <motion.button
-                    className="flex-1 bg-green-600 text-white py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center shadow-lg"
+                <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    className="flex-1"
                 >
-                    <Phone className="w-4 h-4 mr-2" />
-                    Gọi ngay
-                </motion.button>
+                    <Link
+                        href={`tel:${COMPANY_INFO.contact.phone.primary.replace(/\./g, '')}`}
+                        className="w-full bg-green-600 text-white py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center shadow-lg block"
+                    >
+                        <Phone className="w-4 h-4 mr-2" />
+                        Gọi ngay
+                    </Link>
+                </motion.div>
 
-                <motion.button
-                    className="flex-1 bg-blue-600 text-white py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center shadow-lg"
+                <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    className="flex-1"
                 >
-                    <Calculator className="w-4 h-4 mr-2" />
-                    Tính giá
-                </motion.button>
+                    <Link
+                        href="/#pricing"
+                        className="w-full bg-blue-600 text-white py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center shadow-lg block"
+                    >
+                        <Calculator className="w-4 h-4 mr-2" />
+                        Tính giá
+                    </Link>
+                </motion.div>
 
-                <motion.button
-                    className="flex-1 bg-purple-600 text-white py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center shadow-lg"
+                <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    className="flex-1"
                 >
-                    <MessageCircle className="w-4 h-4 mr-2" />
-                    Chat
-                </motion.button>
+                    <Link
+                        href={COMPANY_INFO.messaging.zalo.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full bg-purple-600 text-white py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center shadow-lg block"
+                    >
+                        <MessageCircle className="w-4 h-4 mr-2" />
+                        Chat
+                    </Link>
+                </motion.div>
             </div>
         </motion.div>
     )

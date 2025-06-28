@@ -1,9 +1,11 @@
 'use client'
 
 import { useLanguage } from '@/contexts/LanguageContext'
+import { COMPANY_INFO } from '@/lib/company-metadata'
 import { motion } from 'framer-motion'
 import { ArrowRight, Clock, MapPin, Shield } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Hero() {
     const { t } = useLanguage()
@@ -103,21 +105,23 @@ export default function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 1.2 }}
                         >
-                            <motion.button
-                                className="bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 px-8 py-4 rounded-lg hover:from-amber-300 hover:to-orange-300 transition-all duration-300 font-bold text-lg flex items-center justify-center hover-lift shadow-lg shadow-amber-500/25"
+                            <motion.div
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                {t('getQuote')}
-                                <ArrowRight className="w-5 h-5 ml-2" />
-                            </motion.button>
-                            <motion.button
-                                className="border-2 border-white/80 text-white px-8 py-4 rounded-lg hover:bg-white/10 hover:border-white transition-all duration-300 font-semibold text-lg hover-lift backdrop-blur-sm"
+                                <Link href="/#contact" className="bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 px-8 py-4 rounded-lg hover:from-amber-300 hover:to-orange-300 transition-all duration-300 font-bold text-lg flex items-center justify-center hover-lift shadow-lg shadow-amber-500/25">
+                                    {t('getQuote')}
+                                    <ArrowRight className="w-5 h-5 ml-2" />
+                                </Link>
+                            </motion.div>
+                            <motion.div
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                {t('callNow')}
-                            </motion.button>
+                                <Link href={`tel:${COMPANY_INFO.contact.phone.primary.replace(/\./g, '')}`} className="border-2 border-white/80 text-white px-8 py-4 rounded-lg hover:bg-white/10 hover:border-white transition-all duration-300 font-semibold text-lg hover-lift backdrop-blur-sm block text-center">
+                                    {t('callNow')}
+                                </Link>
+                            </motion.div>
                         </motion.div>
                     </motion.div>
 

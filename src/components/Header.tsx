@@ -125,11 +125,11 @@ export default function Header() {
                     {/* CTA Button */}
                     <div className="hidden md:flex items-center space-x-4">
                         <LanguageSwitcher />
-                        <button className="font-bold bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-3 rounded-xl hover:from-orange-600 hover:to-amber-600 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group">
+                        <Link href="/#contact" className="font-bold bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-3 rounded-xl hover:from-orange-600 hover:to-amber-600 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group">
                             {/* Shimmer effect */}
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                             <span className="relative z-10">{t('bookNow')}</span>
-                        </button>
+                        </Link>
                     </div>
 
                     {/* Mobile menu button */}
@@ -188,11 +188,11 @@ export default function Header() {
                         <div className="pt-4 border-t border-orange-200/50">
                             <LanguageSwitcher />
                         </div>
-                        <button className="font-bold w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-4 rounded-xl hover:from-orange-600 hover:to-amber-600 hover:scale-105 transition-all duration-300 shadow-lg mt-4 relative overflow-hidden group">
+                        <Link href="/#contact" className="font-bold w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-4 rounded-xl hover:from-orange-600 hover:to-amber-600 hover:scale-105 transition-all duration-300 shadow-lg mt-4 relative overflow-hidden group block text-center">
                             {/* Shimmer effect */}
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                             <span className="relative z-10">{t('bookNow')}</span>
-                        </button>
+                        </Link>
                     </nav>
                 </div>
             )}
