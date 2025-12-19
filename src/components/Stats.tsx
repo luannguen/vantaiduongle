@@ -1,469 +1,271 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Award, MapPin, Truck, Users } from 'lucide-react'
-import { useEffect, useState } from 'react'
-
-// Animated Progress Hook for Charts
-const useChartProgress = (startAnimation: boolean = false, duration: number = 2500) => {
-    const [progress, setProgress] = useState(0)
-
-    useEffect(() => {
-        if (!startAnimation) {
-            setProgress(0)
-            return
-        }
-
-        let startTime: number
-        let animationFrame: number
-
-        const animate = (timestamp: number) => {
-            if (!startTime) startTime = timestamp
-            const progressValue = Math.min((timestamp - startTime) / duration, 1)
-
-            setProgress(progressValue)
-
-            if (progressValue < 1) {
-                animationFrame = requestAnimationFrame(animate)
-            }
-        }
-
-        animationFrame = requestAnimationFrame(animate)
-        return () => cancelAnimationFrame(animationFrame)
-    }, [startAnimation, duration])
-
-    return progress
-}
-
-// Animated Counter Hook
-const useCountUp = (end: number, duration: number = 2000, startAnimation: boolean = false) => {
-    const [count, setCount] = useState(0)
-
-    useEffect(() => {
-        if (!startAnimation) return
-
-        let startTime: number
-        let animationFrame: number
-
-        const animate = (timestamp: number) => {
-            if (!startTime) startTime = timestamp
-            const progress = Math.min((timestamp - startTime) / duration, 1)
-
-            setCount(Math.floor(progress * end))
-
-            if (progress < 1) {
-                animationFrame = requestAnimationFrame(animate)
-            }
-        }
-
-        animationFrame = requestAnimationFrame(animate)
-        return () => cancelAnimationFrame(animationFrame)
-    }, [end, duration, startAnimation])
-
-    return count
-}
-
-// Animated Stat Value Component
-const AnimatedStatValue = ({ value, isVisible }: { value: string, isVisible: boolean }) => {
-    // Extract numeric value and non-numeric parts
-    const numericMatch = value.match(/\d+/)
-    const numericValue = numericMatch ? parseInt(numericMatch[0]) : 0
-    const prefix = value.substring(0, value.indexOf(numericMatch?.[0] || ''))
-    const suffix = value.substring((value.indexOf(numericMatch?.[0] || '') + (numericMatch?.[0]?.length || 0)))
-
-    const animatedNumber = useCountUp(numericValue, 2500, isVisible)
-
-    return (
-        <span>
-            {prefix}{animatedNumber}{suffix}
-        </span>
-    )
-}
+import { motion, useScroll, useTransform } from 'framer-motion'
+import {
+    Activity,
+    Award,
+    BarChart3,
+    Clock,
+    Globe2,
+    History,
+    PieChart,
+    Shield,
+    Target,
+    TrendingUp,
+    Truck,
+    Users2
+} from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 
 const stats = [
     {
-        id: 1,
-        label: 'Chuyến vận chuyển',
-        value: '15,000+',
+        label: 'Năm Kinh nghiệm',
+        value: 12,
+        suffix: '+',
+        icon: History,
+        color: 'from-blue-600 to-blue-800',
+        description: 'Vận hành bền bỉ từ 2012'
+    },
+    {
+        label: 'Đối tác chiến lược',
+        value: 500,
+        suffix: '+',
+        icon: Users2,
+        color: 'from-amber-500 to-amber-700',
+        description: 'Tin dùng dịch vụ hàng năm'
+    },
+    {
+        label: 'Tấn hàng vận chuyển',
+        value: 100,
+        suffix: 'k+',
         icon: Truck,
-        color: 'text-blue-600'
+        color: 'from-slate-700 to-slate-900',
+        description: 'An toàn đến mọi miền Tổ quốc'
     },
     {
-        id: 2,
-        label: 'Khách hàng tin tưởng',
-        value: '5,000+',
-        icon: Users,
-        color: 'text-green-600'
-    },
-    {
-        id: 3,
-        label: 'Tỉnh thành phủ sóng',
-        value: '63/63',
-        icon: MapPin,
-        color: 'text-amber-600'
-    },
-    {
-        id: 4,
-        label: 'Năm kinh nghiệm',
-        value: '12+',
-        icon: Award,
-        color: 'text-purple-600'
+        label: 'Độ chính xác thời gian',
+        value: 99.8,
+        suffix: '%',
+        icon: Clock,
+        color: 'from-emerald-600 to-emerald-800',
+        description: 'Cam kết tiến độ tuyệt đối'
     }
 ]
 
+const growthData = [
+    { year: 2020, revenue: 65 },
+    { year: 2021, revenue: 82 },
+    { year: 2022, revenue: 110 },
+    { year: 2023, revenue: 145 },
+    { year: 2024, revenue: 190 }
+]
+
+const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
+    const [count, setCount] = useState(0)
+    const nodeRef = useRef(null)
+
+    useEffect(() => {
+        let startTime: number
+        const duration = 2000
+
+        const animate = (currentTime: number) => {
+            if (!startTime) startTime = currentTime
+            const progress = (currentTime - startTime) / duration
+
+            if (progress < 1) {
+                setCount(Math.floor(value * progress))
+                requestAnimationFrame(animate)
+            } else {
+                setCount(value)
+            }
+        }
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    requestAnimationFrame(animate)
+                }
+            },
+            { threshold: 0.5 }
+        )
+
+        if (nodeRef.current) {
+            observer.observe(nodeRef.current)
+        }
+
+        return () => observer.disconnect()
+    }, [value])
+
+    return <span ref={nodeRef}>{count}{suffix}</span>
+}
+
 export default function Stats() {
-    const [countersVisible, setCountersVisible] = useState(false)
-    const chartProgress = useChartProgress(countersVisible, 3000)
+    const sectionRef = useRef<HTMLElement>(null)
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start end", "end start"]
+    })
+
+    const y1 = useTransform(scrollYProgress, [0, 1], [0, -100])
+    const y2 = useTransform(scrollYProgress, [0, 1], [0, 100])
 
     return (
-        <section className="py-16 bg-gradient-to-r from-slate-50 to-blue-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <motion.div
-                    className="text-center mb-12"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                        Con số ấn tượng
-                    </h2>
-                    <p className="text-lg text-gray-600">
-                        Những thành tích đáng tự hào trong hành trình phát triển
-                    </p>
-                </motion.div>
+        <section ref={sectionRef} className="py-24 bg-slate-950 relative overflow-hidden">
+            {/* Artistic Background */}
+            <div className="absolute inset-0 opacity-10">
+                <motion.div style={{ y: y1 }} className="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] bg-blue-900 rounded-full blur-[150px]" />
+                <motion.div style={{ y: y2 }} className="absolute -bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-amber-500 rounded-full blur-[120px]" />
+            </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-                    {stats.map((stat, index) => {
-
-                        return (
-                            <motion.div
-                                key={stat.id}
-                                className="text-center group"
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{
-                                    opacity: 1,
-                                    y: 0,
-                                    transition: {
-                                        duration: 0.6,
-                                        delay: index * 0.15,
-                                        onComplete: () => {
-                                            if (index === 0) {
-                                                setTimeout(() => setCountersVisible(true), 200)
-                                            }
-                                        }
-                                    }
-                                }}
-                                viewport={{ once: false, amount: 0.8 }}
-                                onViewportEnter={() => {
-                                    if (index === 0) {
-                                        setCountersVisible(false)
-                                        setTimeout(() => {
-                                            setCountersVisible(true)
-                                        }, 300)
-                                    }
-                                }}
-                                whileHover={{ scale: 1.05 }}
-                            >
-                                <div className="bg-white rounded-2xl shadow-lg shadow-blue-500/10 p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-blue-200">
-                                    {/* Icon */}
-                                    <motion.div
-                                        className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${stat.color} bg-opacity-10 mb-6 group-hover:scale-110 transition-transform duration-300`}
-                                        initial={{ scale: 0, rotate: -180 }}
-                                        whileInView={{ scale: 1, rotate: 0 }}
-                                        transition={{ duration: 0.8, delay: index * 0.15 + 0.2, type: "spring", stiffness: 200 }}
-                                        viewport={{ once: false }}
-                                    >
-                                        <stat.icon className={`w-8 h-8 ${stat.color}`} />
-                                    </motion.div>
-
-                                    {/* Number with Counter Animation */}
-                                    <motion.div
-                                        className={`text-4xl md:text-5xl font-bold ${stat.color} mb-4`}
-                                        initial={{ scale: 0.5, opacity: 0 }}
-                                        whileInView={{ scale: 1, opacity: 1 }}
-                                        viewport={{ once: false }}
-                                        transition={{
-                                            duration: 0.6,
-                                            delay: index * 0.15 + 0.4,
-                                            type: "spring",
-                                            stiffness: 150,
-                                            damping: 12
-                                        }}
-                                    >
-                                        <AnimatedStatValue value={stat.value} isVisible={countersVisible} />
-                                    </motion.div>
-
-                                    {/* Label */}
-                                    <motion.p
-                                        className="text-gray-600 font-medium text-sm md:text-base mb-6"
-                                        initial={{ opacity: 0 }}
-                                        whileInView={{ opacity: 1 }}
-                                        transition={{ duration: 0.6, delay: index * 0.15 + 0.6 }}
-                                        viewport={{ once: false }}
-                                    >
-                                        {stat.label}
-                                    </motion.p>
-
-                                    {/* Separate Chart Section */}
-                                    <div className="border-t border-gray-100 pt-4">
-                                        <motion.div
-                                            className="h-32 relative bg-gray-50 rounded-lg p-3"
-                                            initial={{ opacity: 0 }}
-                                            whileInView={{ opacity: 1 }}
-                                            transition={{ duration: 0.8, delay: index * 0.15 + 0.8 }}
-                                            viewport={{ once: false }}
-                                        >
-                                            <svg className="w-full h-full" viewBox="0 0 200 100">
-                                                <defs>
-                                                    <linearGradient id={`chart-gradient-${stat.id}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                                                        <stop offset="0%" stopColor={
-                                                            stat.color.includes('blue') ? '#3B82F6' :
-                                                                stat.color.includes('green') ? '#10B981' :
-                                                                    stat.color.includes('amber') ? '#F59E0B' : '#8B5CF6'
-                                                        } stopOpacity="0.8" />
-                                                        <stop offset="100%" stopColor={
-                                                            stat.color.includes('blue') ? '#3B82F6' :
-                                                                stat.color.includes('green') ? '#10B981' :
-                                                                    stat.color.includes('amber') ? '#F59E0B' : '#8B5CF6'
-                                                        } stopOpacity="0.2" />
-                                                    </linearGradient>
-                                                    <pattern id={`grid-${stat.id}`} width="10" height="8" patternUnits="userSpaceOnUse">
-                                                        <path d="M 10 0 L 0 0 0 8" fill="none" stroke="#e5e7eb" strokeWidth="0.5" />
-                                                    </pattern>
-                                                </defs>
-
-                                                {/* Grid background */}
-                                                <rect width="180" height="70" x="15" y="15" fill={`url(#grid-${stat.id})`} opacity="0.5" />
-
-                                                {/* Y-axis */}
-                                                <line x1="15" y1="15" x2="15" y2="85" stroke="#6b7280" strokeWidth="1" />
-
-                                                {/* X-axis */}
-                                                <line x1="15" y1="85" x2="195" y2="85" stroke="#6b7280" strokeWidth="1" />
-
-                                                {/* Y-axis labels */}
-                                                {[0, 25, 50, 75, 100].map((value, idx) => (
-                                                    <g key={idx}>
-                                                        <text x="10" y={85 - idx * 17.5} fontSize="6" fill="#6b7280" textAnchor="end">
-                                                            {stat.id === 1 ? `${value * 150}` :
-                                                                stat.id === 2 ? `${value * 50}` :
-                                                                    stat.id === 3 ? `${value}%` : `${value / 10}`}
-                                                        </text>
-                                                        <line x1="13" y1={85 - idx * 17.5} x2="15" y2={85 - idx * 17.5} stroke="#6b7280" strokeWidth="0.5" />
-                                                    </g>
-                                                ))}
-
-                                                {/* X-axis labels */}
-                                                {['2020', '2021', '2022', '2023', '2024'].map((year, idx) => (
-                                                    <g key={idx}>
-                                                        <text x={15 + idx * 36} y="95" fontSize="6" fill="#6b7280" textAnchor="middle">
-                                                            {year}
-                                                        </text>
-                                                        <line x1={15 + idx * 36} y1="83" x2={15 + idx * 36} y2="85" stroke="#6b7280" strokeWidth="0.5" />
-                                                    </g>
-                                                ))}
-
-                                                {/* Data points and bars */}
-                                                {[
-                                                    stat.id === 1 ? [35, 45, 52, 68, 85] : // Truck deliveries growth
-                                                        stat.id === 2 ? [25, 35, 48, 65, 85] : // Customer growth  
-                                                            stat.id === 3 ? [45, 55, 70, 85, 95] : // Coverage growth
-                                                                [20, 35, 50, 70, 85] // Experience/awards
-                                                ][0].map((height, pointIndex) => (
-                                                    <g key={pointIndex}>
-                                                        {/* Data bars with chart progress */}
-                                                        <rect
-                                                            x={15 + pointIndex * 36 - 8}
-                                                            y={85 - (height * 0.7 * chartProgress)}
-                                                            width="16"
-                                                            height={height * 0.7 * chartProgress}
-                                                            fill={`url(#chart-gradient-${stat.id})`}
-                                                            rx="1"
-                                                        />
-
-                                                        {/* Data points */}
-                                                        <circle
-                                                            cx={15 + pointIndex * 36}
-                                                            cy={85 - height * 0.7 * chartProgress}
-                                                            r={chartProgress > 0.5 ? 2 : 0}
-                                                            fill={
-                                                                stat.color.includes('blue') ? '#1d4ed8' :
-                                                                    stat.color.includes('green') ? '#059669' :
-                                                                        stat.color.includes('amber') ? '#d97706' : '#7c3aed'
-                                                            }
-                                                        />
-
-                                                        {/* Value labels */}
-                                                        <text
-                                                            x={15 + pointIndex * 36}
-                                                            y={85 - height * 0.7 * chartProgress - 5}
-                                                            fontSize="5"
-                                                            fill={
-                                                                stat.color.includes('blue') ? '#1d4ed8' :
-                                                                    stat.color.includes('green') ? '#059669' :
-                                                                        stat.color.includes('amber') ? '#d97706' : '#7c3aed'
-                                                            }
-                                                            textAnchor="middle"
-                                                            fontWeight="600"
-                                                            opacity={chartProgress > 0.7 ? 1 : 0}
-                                                        >
-                                                            {stat.id === 1 ? `${Math.floor(height * 150 * chartProgress)}` :
-                                                                stat.id === 2 ? `${Math.floor(height * 50 * chartProgress)}` :
-                                                                    stat.id === 3 ? `${Math.floor(height * chartProgress)}%` :
-                                                                        `${((height / 10) * chartProgress).toFixed(1)}`}
-                                                        </text>
-                                                    </g>
-                                                ))}
-
-                                                {/* Trend line connecting points */}
-                                                <path
-                                                    d={`M15,${85 - (stat.id === 1 ? 35 : stat.id === 2 ? 25 : stat.id === 3 ? 45 : 20) * 0.7 * chartProgress} 
-                                                   L51,${85 - (stat.id === 1 ? 45 : stat.id === 2 ? 35 : stat.id === 3 ? 55 : 35) * 0.7 * chartProgress}
-                                                   L87,${85 - (stat.id === 1 ? 52 : stat.id === 2 ? 48 : stat.id === 3 ? 70 : 50) * 0.7 * chartProgress}
-                                                   L123,${85 - (stat.id === 1 ? 68 : stat.id === 2 ? 65 : stat.id === 3 ? 85 : 70) * 0.7 * chartProgress}
-                                                   L159,${85 - (stat.id === 1 ? 85 : stat.id === 2 ? 85 : stat.id === 3 ? 95 : 85) * 0.7 * chartProgress}`}
-                                                    stroke={
-                                                        stat.color.includes('blue') ? '#3B82F6' :
-                                                            stat.color.includes('green') ? '#10B981' :
-                                                                stat.color.includes('amber') ? '#F59E0B' : '#8B5CF6'
-                                                    }
-                                                    strokeWidth="1.5"
-                                                    fill="none"
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    opacity={chartProgress}
-                                                />
-
-                                                {/* Chart title */}
-                                                <text x="100" y="10" fontSize="7" fill="#374151" textAnchor="middle" fontWeight="600">
-                                                    {stat.id === 1 ? 'Số chuyến/tháng' :
-                                                        stat.id === 2 ? 'Khách hàng mới' :
-                                                            stat.id === 3 ? 'Tỉ lệ phủ sóng' : 'Điểm kinh nghiệm'}
-                                                </text>
-                                            </svg>
-                                        </motion.div>
-
-                                        {/* Chart statistics */}
-                                        <motion.div
-                                            className="mt-3 grid grid-cols-2 gap-2 text-xs"
-                                            initial={{ opacity: 0 }}
-                                            whileInView={{ opacity: 1 }}
-                                            transition={{ duration: 0.6, delay: index * 0.15 + 2.5 }}
-                                            viewport={{ once: false }}
-                                        >
-                                            <div className="text-center p-2 bg-white rounded border">
-                                                <div className={`font-bold ${stat.color}`}>
-                                                    +{stat.id === 1 ? Math.floor(143 * chartProgress) :
-                                                        stat.id === 2 ? Math.floor(240 * chartProgress) :
-                                                            stat.id === 3 ? Math.floor(111 * chartProgress) :
-                                                                Math.floor(325 * chartProgress)}%
-                                                </div>
-                                                <div className="text-gray-500">5 năm qua</div>
-                                            </div>
-                                            <div className="text-center p-2 bg-white rounded border">
-                                                <div className={`font-bold ${stat.color}`}>
-                                                    {stat.id === 1 ? (98.5 * chartProgress).toFixed(1) :
-                                                        stat.id === 2 ? (96.2 * chartProgress).toFixed(1) :
-                                                            stat.id === 3 ? (100 * chartProgress).toFixed(1) :
-                                                                (99.1 * chartProgress).toFixed(1)}%
-                                                </div>
-                                                <div className="text-gray-500">Độ tin cậy</div>
-                                            </div>
-                                        </motion.div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        )
-                    })}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                {/* Header */}
+                <div className="flex flex-col lg:flex-row items-end justify-between gap-8 mb-20">
+                    <div className="max-w-2xl">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="flex items-center space-x-2 text-amber-500 font-bold tracking-widest uppercase mb-4"
+                        >
+                            <Activity className="w-5 h-5" />
+                            <span>Hiệu suất & Tin cậy</span>
+                        </motion.div>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-4xl md:text-6xl font-bold text-white leading-tight"
+                        >
+                            Đo lường <span className="text-gradient-gold">Giá trị Thực</span> <br />
+                            Trong từng chuyến hàng
+                        </motion.h2>
+                    </div>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                        className="text-slate-400 text-lg max-w-sm mb-2"
+                    >
+                        Cam kết minh bạch dữ liệu, không ngừng cải tiến quy trình để mang lại hiệu quả kinh tế cao nhất cho đối tác.
+                    </motion.p>
                 </div>
 
-                <motion.div
-                    className="text-center mt-12"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false }}
-                    transition={{ duration: 0.8, delay: 1.5 }}
-                >
-                    <motion.div
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{
-                            duration: 0.6,
-                            delay: 2,
-                            type: "spring",
-                            stiffness: 200
-                        }}
-                        viewport={{ once: false }}
-                        className="inline-block"
-                    >
-                        <div className="relative">
-                            {/* Background Chart */}
-                            <div className="absolute inset-0 opacity-10">
-                                <svg className="w-full h-full" viewBox="0 0 300 80">
-                                    <motion.path
-                                        d="M0,60 Q75,20 150,40 T300,25"
-                                        stroke="#3B82F6"
-                                        strokeWidth="2"
-                                        fill="none"
-                                        initial={{ pathLength: 0 }}
-                                        whileInView={{ pathLength: 1 }}
-                                        transition={{ duration: 2, delay: 2.5 }}
-                                        viewport={{ once: false }}
-                                    />
-                                    <motion.path
-                                        d="M0,60 Q75,20 150,40 T300,25 L300,80 L0,80 Z"
-                                        fill="url(#award-gradient)"
-                                        initial={{ pathLength: 0 }}
-                                        whileInView={{ pathLength: 1 }}
-                                        transition={{ duration: 2, delay: 3 }}
-                                        viewport={{ once: false }}
-                                    />
-                                    <defs>
-                                        <linearGradient id="award-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                            <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.3" />
-                                            <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.1" />
-                                        </linearGradient>
-                                    </defs>
-                                </svg>
+                {/* Main Stats Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+                    {stats.map((stat, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 }}
+                            className="glass-card bg-white/5 border-white/10 p-10 rounded-[2.5rem] relative overflow-hidden group hover:bg-white/10 transition-all duration-500"
+                        >
+                            <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${stat.color} mb-8 shadow-lg group-hover:scale-110 transition-transform duration-500`}>
+                                <stat.icon className="w-8 h-8 text-white" />
+                            </div>
+                            <div className="relative">
+                                <div className="text-5xl font-black text-white mb-2 tracking-tighter">
+                                    <Counter value={stat.value} suffix={stat.suffix} />
+                                </div>
+                                <div className="text-lg font-bold text-slate-200 mb-2 uppercase tracking-wide">{stat.label}</div>
+                                <p className="text-slate-500 text-sm leading-relaxed">{stat.description}</p>
                             </div>
 
-                            <p className="text-gray-600 bg-white px-8 py-4 rounded-full shadow-lg border border-gray-100 relative z-10">
-                                🏆 Được vinh danh <span className="font-semibold text-blue-600">&ldquo;Doanh nghiệp vận tải uy tín 2023&rdquo;</span>
+                            {/* Decorative line */}
+                            <div className="absolute bottom-0 left-0 w-full h-1.5 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+                        </motion.div>
+                    ))}
+                </div>
 
-                                {/* Floating sparkles */}
-                                <motion.span
-                                    initial={{ opacity: 0, y: 0 }}
-                                    whileInView={{ opacity: [0, 1, 0], y: -20 }}
-                                    transition={{
-                                        duration: 2,
-                                        delay: 3.5,
-                                        repeat: Infinity,
-                                        repeatDelay: 3
-                                    }}
-                                    viewport={{ once: false }}
-                                    className="absolute -top-2 left-1/4 text-yellow-400"
-                                >
-                                    ✨
-                                </motion.span>
-                                <motion.span
-                                    initial={{ opacity: 0, y: 0 }}
-                                    whileInView={{ opacity: [0, 1, 0], y: -20 }}
-                                    transition={{
-                                        duration: 2,
-                                        delay: 4,
-                                        repeat: Infinity,
-                                        repeatDelay: 3
-                                    }}
-                                    viewport={{ once: false }}
-                                    className="absolute -top-2 right-1/4 text-yellow-400"
-                                >
-                                    ⭐
-                                </motion.span>
+                {/* Data Insights Section */}
+                <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+                    {/* Growth Chart */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="glass-card bg-slate-900/50 border-white/10 p-10 rounded-[3rem] relative overflow-hidden"
+                    >
+                        <div className="flex items-center justify-between mb-10">
+                            <div>
+                                <h3 className="text-2xl font-bold text-white flex items-center">
+                                    <TrendingUp className="w-6 h-6 text-emerald-400 mr-3" />
+                                    Tăng trưởng hàng năm
+                                </h3>
+                                <p className="text-slate-500 text-sm mt-1">Sản lượng tấn hàng vận chuyển (nghìn tấn)</p>
+                            </div>
+                            <div className="bg-emerald-500/10 text-emerald-400 px-4 py-1.5 rounded-full text-xs font-bold border border-emerald-500/20">
+                                +35% CAGR
+                            </div>
+                        </div>
+
+                        <div className="flex items-end justify-between h-[250px] gap-4">
+                            {growthData.map((item, index) => (
+                                <div key={index} className="flex-1 flex flex-col items-center group">
+                                    <motion.div
+                                        initial={{ height: 0 }}
+                                        whileInView={{ height: `${(item.revenue / 200) * 100}%` }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 1.5, delay: index * 0.1 }}
+                                        className="w-full bg-gradient-to-t from-blue-600/20 via-blue-500/40 to-blue-400 rounded-2xl relative group-hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all duration-300"
+                                    >
+                                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-white text-slate-950 text-xs font-bold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl">
+                                            {item.revenue}k Tấn
+                                        </div>
+                                    </motion.div>
+                                    <div className="mt-6 text-sm font-bold text-slate-500">{item.year}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+
+                    {/* Features/Trust Grid */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="grid grid-cols-2 gap-6"
+                    >
+                        <div className="glass-card bg-white/5 border-white/10 p-8 rounded-[2.5rem] space-y-4 hover:border-blue-500/30 transition-colors">
+                            <div className="w-12 h-12 bg-blue-500/20 rounded-2xl flex items-center justify-center">
+                                <Shield className="w-6 h-6 text-blue-400" />
+                            </div>
+                            <h4 className="text-lg font-bold text-white tracking-tight">An toàn 100%</h4>
+                            <p className="text-slate-500 text-sm leading-relaxed">
+                                Bảo hiểm hàng hóa trách nhiệm dân sự lên đến 10 tỷ đồng mỗi vụ.
+                            </p>
+                        </div>
+                        <div className="glass-card bg-white/5 border-white/10 p-8 rounded-[2.5rem] space-y-4 hover:border-amber-500/30 transition-colors">
+                            <div className="w-12 h-12 bg-amber-500/20 rounded-2xl flex items-center justify-center">
+                                <Target className="w-6 h-6 text-amber-500" />
+                            </div>
+                            <h4 className="text-lg font-bold text-white tracking-tight">Chính xác</h4>
+                            <p className="text-slate-500 text-sm leading-relaxed">
+                                Hệ thống TMS thông minh tối ưu hóa lộ trình và theo dõi real-time.
+                            </p>
+                        </div>
+                        <div className="glass-card bg-white/5 border-white/10 p-8 rounded-[2.5rem] space-y-4 hover:border-emerald-500/30 transition-colors">
+                            <div className="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center">
+                                <Globe2 className="w-6 h-6 text-emerald-400" />
+                            </div>
+                            <h4 className="text-lg font-bold text-white tracking-tight">Toàn quốc</h4>
+                            <p className="text-slate-500 text-sm leading-relaxed">
+                                63 tỉnh thành được phủ sóng bởi mạng lưới vận hành chuyên nghiệp.
+                            </p>
+                        </div>
+                        <div className="glass-card bg-white/5 border-white/10 p-8 rounded-[2.5rem] space-y-4 hover:border-slate-500/30 transition-colors">
+                            <div className="w-12 h-12 bg-slate-500/20 rounded-2xl flex items-center justify-center">
+                                <BarChart3 className="w-6 h-6 text-slate-400" />
+                            </div>
+                            <h4 className="text-lg font-bold text-white tracking-tight">Tối ưu</h4>
+                            <p className="text-slate-500 text-sm leading-relaxed">
+                                Giúp doanh nghiệp giảm trung bình 15% tổng chi phí logistics.
                             </p>
                         </div>
                     </motion.div>
-                </motion.div>
+                </div>
             </div>
         </section>
     )
