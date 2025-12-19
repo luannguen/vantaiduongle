@@ -1,8 +1,9 @@
 'use client'
 
 import { useLanguage } from '@/contexts/LanguageContext'
-import { COMPANY_INFO, getCompanyName } from '@/lib/company-metadata'
-import { Mail, Menu, Phone, Truck, X } from 'lucide-react'
+import { getCompanyPhone, getCompanyEmail } from '@/lib/company-metadata'
+import { translations } from '@/lib/translations'
+import { Mail, Menu, Phone, Truck, X, Clock, ArrowRight, Package } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import LanguageSwitcher from './LanguageSwitcher'
@@ -18,12 +19,8 @@ export default function Header() {
 
         const handleScroll = () => {
             const currentScrollY = window.scrollY
-
             setIsScrolled(currentScrollY > 50)
-
-            // Hide header when scrolled down significantly
             setIsHidden(currentScrollY > 300 && currentScrollY > lastScrollY)
-
             lastScrollY = currentScrollY
         }
 
@@ -31,184 +28,132 @@ export default function Header() {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+    const navItems: { href: string; label: keyof typeof translations.vi; isSpecial?: boolean }[] = [
+        { href: '/#home', label: 'home' },
+        { href: '/#services', label: 'services' },
+        { href: '/#trucks', label: 'trucks' },
+        { href: '/#partners', label: 'partners' },
+        { href: '/#contact', label: 'contact' },
+    ]
+
     return (
-        <header className={`sticky top-0 z-50 transition-all duration-500 ${isHidden
-                ? '-translate-y-full opacity-0'
-                : 'translate-y-0 opacity-100'
-            } ${isScrolled
-                ? 'bg-gradient-to-r from-orange-50/95 via-amber-50/95 to-yellow-50/95 backdrop-blur-lg shadow-2xl border-b border-orange-200/30'
-                : 'bg-gradient-to-r from-orange-50 via-amber-50 to-yellow-50 shadow-xl border-b border-orange-100/50'
+        <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isHidden ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'
             }`}>
-            {/* Background decorative elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-200/20 to-amber-200/20 rounded-full blur-2xl -translate-y-16 translate-x-16" />
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-br from-amber-200/20 to-yellow-200/20 rounded-full blur-2xl translate-y-8 -translate-x-8" />
-            </div>
-
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                {/* Top bar - Enhanced with more credibility */}
-                <div className={`border-b border-orange-200/30 py-3 transition-all duration-300 ${isScrolled ? 'h-0 py-0 opacity-0 overflow-hidden' : 'h-auto opacity-100'
-                    }`}>
-                    <div className="flex justify-between items-center text-sm">
-                        <div className="flex items-center space-x-6">
-                            <div className="flex items-center bg-white/70 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm border border-orange-100">
-                                <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-                                <Phone className="w-4 h-4 mr-2 text-orange-600" />
-                                <span className="font-semibold text-slate-700">Hotline: {COMPANY_INFO.contact.phone.primary}</span>
-                            </div>
-                            <div className="flex items-center bg-white/70 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm border border-orange-100">
-                                <Mail className="w-4 h-4 mr-2 text-orange-600" />
-                                <span className="font-medium text-slate-700">{COMPANY_INFO.contact.email.primary}</span>
-                            </div>
-                            <div className="hidden lg:flex items-center bg-gradient-to-r from-orange-100 to-amber-100 px-3 py-1.5 rounded-full shadow-sm border border-orange-200">
-                                <div className="w-2 h-2 bg-orange-400 rounded-full mr-2 animate-pulse"></div>
-                                <span className="font-semibold text-orange-800 text-xs">15+ NĂM KINH NGHIỆM</span>
-                            </div>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <div className="flex items-center bg-white/70 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm border border-orange-100">
-                                <div className="w-2 h-2 bg-blue-400 rounded-full mr-2 animate-pulse"></div>
-                                <span className="font-semibold text-slate-700 text-xs">PHỤC VỤ 24/7</span>
-                            </div>
-                            <div className="hidden md:flex items-center bg-gradient-to-r from-green-100 to-emerald-100 px-3 py-1.5 rounded-full shadow-sm border border-green-200">
-                                <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-                                <span className="font-semibold text-green-800 text-xs">MIỄN PHÍ TƯ VẤN</span>
-                            </div>
-                        </div>
+            {/* Top Bar - Enterprise Navy */}
+            <div className={`bg-slate-900 text-white transition-all duration-300 overflow-hidden ${isScrolled ? 'h-0 opacity-0' : 'h-10 opacity-100'
+                }`}>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center text-[10px] sm:text-xs">
+                    <div className="flex items-center space-x-6">
+                        <a href={`tel:${getCompanyPhone().replace(/\./g, '')}`} className="flex items-center hover:text-amber-400 transition-colors">
+                            <Phone className="w-3 h-3 mr-2 text-amber-500" />
+                            {getCompanyPhone()}
+                        </a>
+                        <a href={`mailto:${getCompanyEmail()}`} className="hidden md:flex items-center hover:text-amber-400 transition-colors">
+                            <Mail className="w-3 h-3 mr-2 text-amber-500" />
+                            {getCompanyEmail()}
+                        </a>
                     </div>
-                </div>
-
-                {/* Main header */}
-                <div className={`flex justify-between items-center transition-all duration-300 ${isScrolled ? 'py-3' : 'py-4'
-                    }`}>
-                    <Link href="/" className="flex items-center group">
-                        <div className="relative">
-                            <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
-                            <Truck className={`relative text-white bg-gradient-to-br from-orange-500 to-amber-600 p-2 rounded-xl shadow-lg transition-all duration-300 ${isScrolled ? 'w-10 h-10' : 'w-12 h-12'
-                                } group-hover:scale-110 group-hover:rotate-3`} />
+                    <div className="flex items-center space-x-6">
+                        <div className="hidden lg:flex items-center text-slate-400">
+                            <Clock className="w-3 h-3 mr-2" />
+                            <span>{t('workingHours')}</span>
                         </div>
-                        <div className="ml-4">
-                            <h1 className={`brand-title text-2xl bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent transition-all duration-300 ${isScrolled ? 'text-xl' : 'text-2xl'
-                                } group-hover:from-orange-700 group-hover:via-amber-700 group-hover:to-yellow-700`}>
-                                {getCompanyName('vi')}
-                            </h1>
-                            <div className="flex items-center space-x-2">
-                                <p className={`text-slate-600 transition-all duration-300 ${isScrolled ? 'text-xs opacity-75' : 'text-sm opacity-100'
-                                    }`}>
-                                    Dịch vụ vận chuyển uy tín
-                                </p>
-                                <div className={`flex items-center bg-gradient-to-r from-orange-100 to-amber-100 px-2 py-1 rounded-full transition-all duration-300 ${isScrolled ? 'text-xs px-1.5 py-0.5' : 'text-xs'
-                                    }`}>
-                                    <div className="w-1.5 h-1.5 bg-orange-400 rounded-full mr-1.5 animate-pulse"></div>
-                                    <span className="font-semibold text-orange-800">CHÍNH HÃNG</span>
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-
-                    {/* Desktop Navigation */}
-                    <nav className="hidden md:flex space-x-8">
-                        <Link href="/#home" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
-                            {t('home')}
-                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-amber-500 transition-all duration-300 group-hover:w-full rounded-full"></span>
-                            <span className="absolute inset-0 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
-                        </Link>
-                        <Link href="/#services" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
-                            {t('services')}
-                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-amber-500 transition-all duration-300 group-hover:w-full rounded-full"></span>
-                            <span className="absolute inset-0 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
-                        </Link>
-                        <Link href="/#trucks" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
-                            {t('trucks')}
-                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-amber-500 transition-all duration-300 group-hover:w-full rounded-full"></span>
-                            <span className="absolute inset-0 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
-                        </Link>
-                        <Link href="/#about" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
-                            {t('about')}
-                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-amber-500 transition-all duration-300 group-hover:w-full rounded-full"></span>
-                            <span className="absolute inset-0 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
-                        </Link>
-                        <Link href="/#contact" className="nav-link text-slate-700 hover:text-orange-600 transition-all duration-300 relative group py-2">
-                            {t('contact')}
-                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-amber-500 transition-all duration-300 group-hover:w-full rounded-full"></span>
-                            <span className="absolute inset-0 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
-                        </Link>
-                    </nav>
-
-                    {/* CTA Button */}
-                    <div className="hidden md:flex items-center space-x-4">
                         <LanguageSwitcher />
-                        <Link href="/#contact" className="font-bold bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-3 rounded-xl hover:from-orange-600 hover:to-amber-600 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group">
-                            {/* Shimmer effect */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                            <span className="relative z-10">{t('bookNow')}</span>
-                        </Link>
                     </div>
-
-                    {/* Mobile menu button */}
-                    <button
-                        className="md:hidden bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm border border-orange-200 hover:bg-white/90 transition-all duration-300"
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    >
-                        {isMenuOpen ? (
-                            <X className="w-6 h-6 text-orange-600" />
-                        ) : (
-                            <Menu className="w-6 h-6 text-orange-600" />
-                        )}
-                    </button>
                 </div>
             </div>
 
-            {/* Mobile Navigation */}
-            {isMenuOpen && (
-                <div className="md:hidden bg-gradient-to-r from-orange-50/95 via-amber-50/95 to-yellow-50/95 backdrop-blur-lg border-t border-orange-200/50 animate-slideDown shadow-xl">
-                    <nav className="px-4 py-6 space-y-2">
-                        <Link
-                            href="/#home"
-                            className="nav-link block text-slate-700 hover:text-orange-600 transition-all duration-300 py-3 px-4 rounded-xl hover:bg-white/70 hover:shadow-sm hover:translate-x-2 border border-transparent hover:border-orange-100"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            {t('home')}
+            {/* Main Header - Glassmorphism */}
+            <header
+                className={`transition-all duration-500 ${isScrolled
+                    ? 'py-3 glass-panel border-b border-primary-100/20 mx-4 mt-2 rounded-2xl shadow-2xl'
+                    : 'py-5 bg-white/50 backdrop-blur-sm'
+                    }`}
+            >
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-between items-center">
+                        {/* Logo */}
+                        <Link href="/" className="group flex items-center space-x-3">
+                            <div className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-primary-700 to-primary-900 rounded-xl shadow-lg group-hover:scale-105 transition-transform">
+                                <Truck className="text-white w-6 h-6" />
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-lg font-black tracking-tighter text-slate-900 leading-none">
+                                    62 DƯƠNG LÊ
+                                </span>
+                                <span className="text-[9px] font-bold text-primary-600 tracking-[0.2em] uppercase mt-1">
+                                    LOGISTICS ENTERPRISE
+                                </span>
+                            </div>
                         </Link>
-                        <Link
-                            href="/#services"
-                            className="nav-link block text-slate-700 hover:text-orange-600 transition-all duration-300 py-3 px-4 rounded-xl hover:bg-white/70 hover:shadow-sm hover:translate-x-2 border border-transparent hover:border-orange-100"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            {t('services')}
-                        </Link>
-                        <Link
-                            href="/#trucks"
-                            className="nav-link block text-slate-700 hover:text-orange-600 transition-all duration-300 py-3 px-4 rounded-xl hover:bg-white/70 hover:shadow-sm hover:translate-x-2 border border-transparent hover:border-orange-100"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            {t('trucks')}
-                        </Link>
-                        <Link
-                            href="/#about"
-                            className="nav-link block text-slate-700 hover:text-orange-600 transition-all duration-300 py-3 px-4 rounded-xl hover:bg-white/70 hover:shadow-sm hover:translate-x-2 border border-transparent hover:border-orange-100"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            {t('about')}
-                        </Link>
-                        <Link
-                            href="/#contact"
-                            className="nav-link block text-slate-700 hover:text-orange-600 transition-all duration-300 py-3 px-4 rounded-xl hover:bg-white/70 hover:shadow-sm hover:translate-x-2 border border-transparent hover:border-orange-100"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            {t('contact')}
-                        </Link>
-                        <div className="pt-4 border-t border-orange-200/50">
-                            <LanguageSwitcher />
+
+                        {/* Desktop Navigation */}
+                        <nav className="hidden lg:flex items-center space-x-1">
+                            {navItems.map((item) => (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-primary-600 rounded-lg hover:bg-primary-50/50 transition-all"
+                                >
+                                    {t(item.label)}
+                                </Link>
+                            ))}
+                        </nav>
+
+                        {/* CTA Buttons */}
+                        <div className="hidden lg:flex items-center space-x-3">
+                            <Link
+                                href="/#tracking"
+                                className="px-5 py-2.5 bg-slate-100 text-slate-700 rounded-xl font-bold text-sm hover:bg-slate-200 transition-all flex items-center"
+                            >
+                                <Package className="mr-2 w-4 h-4" />
+                                {t('tracking')}
+                            </Link>
+                            <Link
+                                href="/#contact"
+                                className="relative group px-6 py-2.5 bg-primary-700 text-white rounded-xl font-bold text-sm shadow-lg hover:bg-primary-800 transition-all flex items-center overflow-hidden"
+                            >
+                                <div className="absolute inset-0 w-1/2 h-full bg-white/10 skew-x-[-20deg] group-hover:translate-x-[200%] transition-transform duration-700 -translate-x-full"></div>
+                                <span>{t('partnershipCTA')}</span>
+                                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </Link>
                         </div>
-                        <Link href="/#contact" className="font-bold w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-4 rounded-xl hover:from-orange-600 hover:to-amber-600 hover:scale-105 transition-all duration-300 shadow-lg mt-4 relative overflow-hidden group block text-center">
-                            {/* Shimmer effect */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                            <span className="relative z-10">{t('bookNow')}</span>
-                        </Link>
-                    </nav>
+
+                        {/* Mobile menu button */}
+                        <button
+                            className="lg:hidden p-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-primary-50 transition-colors"
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        >
+                            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                        </button>
+                    </div>
                 </div>
-            )}
-        </header>
+
+                {/* Mobile Navigation */}
+                {isMenuOpen && (
+                    <div className="lg:hidden mt-4 px-4 pb-6 animate-in slide-in-from-top duration-300">
+                        <div className="glass-panel rounded-2xl p-4 space-y-2">
+                            {navItems.map((item) => (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className="block px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-primary-50 rounded-xl transition-all"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    {t(item.label)}
+                                </Link>
+                            ))}
+                            <Link
+                                href="/#contact"
+                                className="block w-full text-center py-4 bg-primary-700 text-white rounded-xl font-bold shadow-lg mt-4"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                {t('partnershipCTA')}
+                            </Link>
+                        </div>
+                    </div>
+                )}
+            </header>
+        </div>
     )
 }

@@ -1,508 +1,219 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Clock, MapPin, Package, Phone, Shield, Truck } from 'lucide-react'
+import { Clock, MapPin, Package, Phone, Shield, Truck, CheckCircle2, Star, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
+import Image from 'next/image'
 
-// Component cho icon xe tải với hiệu ứng chạy
+// Professional Animated Icons
 const AnimatedTruck = () => (
-    <div className="relative">
-        <motion.div
-            animate={{
-                x: [0, 2, 0, -1, 0],
-                y: [0, -0.5, 0, 0.5, 0]
-            }}
-            transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut"
-            }}
-        >
-            <Truck className="w-8 h-8 text-orange-600" />
-        </motion.div>
-        {/* Khói từ ống xả */}
-        <motion.div
-            className="absolute -top-1 -right-1"
-            animate={{
-                opacity: [0.3, 0.7, 0.3],
-                scale: [0.8, 1.2, 0.8],
-                x: [0, 2, 4]
-            }}
-            transition={{
-                duration: 1,
-                repeat: Infinity,
-                ease: "easeOut"
-            }}
-        >
-            <div className="text-xs text-gray-400">💨</div>
-        </motion.div>
+    <div className="relative w-12 h-12 flex items-center justify-center bg-primary-50 rounded-2xl group-hover:bg-primary-600 transition-colors duration-500">
+        <Truck className="w-6 h-6 text-primary-600 group-hover:text-white transition-colors duration-500" />
     </div>
 )
 
-// Component cho icon đồng hồ với kim quay
 const AnimatedClock = () => (
-    <div className="relative inline-block w-8 h-8">
-        <Clock className="w-8 h-8 text-orange-600" />
-        {/* Kim giờ */}
-        <motion.div
-            className="absolute w-0.5 bg-orange-800 rounded-full origin-bottom"
-            style={{
-                height: '8px',
-                bottom: '50%',
-                left: '50%',
-                marginLeft: '-1px',
-                transformOrigin: "bottom center"
-            }}
-            animate={{ rotate: 360 }}
-            transition={{
-                duration: 12,
-                repeat: Infinity,
-                ease: "linear"
-            }}
-        />
-        {/* Kim phút */}
-        <motion.div
-            className="absolute w-0.5 bg-orange-600 rounded-full origin-bottom"
-            style={{
-                height: '12px',
-                bottom: '50%',
-                left: '50%',
-                marginLeft: '-1px',
-                transformOrigin: "bottom center"
-            }}
-            animate={{ rotate: 360 }}
-            transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "linear"
-            }}
-        />
-        {/* Kim giây */}
-        <motion.div
-            className="absolute w-px bg-red-500 rounded-full origin-bottom"
-            style={{
-                height: '14px',
-                bottom: '50%',
-                left: '50%',
-                marginLeft: '-0.5px',
-                transformOrigin: "bottom center"
-            }}
-            animate={{ rotate: 360 }}
-            transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "linear"
-            }}
-        />
-        {/* Tâm đồng hồ */}
-        <div className="absolute w-1.5 h-1.5 bg-orange-800 rounded-full z-10"
-            style={{
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)'
-            }} />
+    <div className="relative w-12 h-12 flex items-center justify-center bg-primary-50 rounded-2xl group-hover:bg-primary-600 transition-colors duration-500">
+        <Clock className="w-6 h-6 text-primary-600 group-hover:text-white transition-colors duration-500" />
     </div>
 )
 
-// Component cho icon shield với hiệu ứng bảo vệ
 const AnimatedShield = () => (
-    <div className="relative">
-        <motion.div
-            animate={{
-                scale: [1, 1.05, 1],
-            }}
-            transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-            }}
-        >
-            <Shield className="w-8 h-8 text-orange-600" />
-        </motion.div>
-        {/* Hiệu ứng sóng bảo vệ */}
-        <motion.div
-            className="absolute inset-0 border-2 border-orange-300 rounded-full"
-            animate={{
-                scale: [1, 1.8, 1],
-                opacity: [0.8, 0, 0.8]
-            }}
-            transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeOut"
-            }}
-        />
-        <motion.div
-            className="absolute inset-0 border border-orange-200 rounded-full"
-            animate={{
-                scale: [1, 2.2, 1],
-                opacity: [0.6, 0, 0.6]
-            }}
-            transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeOut",
-                delay: 0.5
-            }}
-        />
+    <div className="relative w-12 h-12 flex items-center justify-center bg-primary-50 rounded-2xl group-hover:bg-primary-600 transition-colors duration-500">
+        <Shield className="w-6 h-6 text-primary-600 group-hover:text-white transition-colors duration-500" />
     </div>
 )
 
-// Component cho icon map pin với hiệu ứng bounce
 const AnimatedMapPin = () => (
-    <motion.div
-        animate={{
-            y: [0, -4, 0],
-        }}
-        transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut"
-        }}
-    >
-        <MapPin className="w-8 h-8 text-orange-600" />
-    </motion.div>
-)
-
-// Component cho icon phone với hiệu ứng chuông
-const AnimatedPhone = () => (
-    <div className="relative">
-        <motion.div
-            animate={{
-                rotate: [0, 8, -8, 8, -8, 0],
-            }}
-            transition={{
-                duration: 0.6,
-                repeat: Infinity,
-                repeatDelay: 2,
-                ease: "easeInOut"
-            }}
-        >
-            <Phone className="w-8 h-8 text-orange-600" />
-        </motion.div>
-        {/* Sóng âm thanh */}
-        <motion.div
-            className="absolute -top-1 -right-1"
-            animate={{
-                scale: [0, 1.5, 0],
-                opacity: [0, 0.8, 0]
-            }}
-            transition={{
-                duration: 0.8,
-                repeat: Infinity,
-                repeatDelay: 1.8,
-                ease: "easeOut"
-            }}
-        >
-            <div className="w-3 h-3 border-2 border-orange-400 rounded-full" />
-        </motion.div>
-        <motion.div
-            className="absolute -top-2 -right-2"
-            animate={{
-                scale: [0, 2, 0],
-                opacity: [0, 0.4, 0]
-            }}
-            transition={{
-                duration: 0.8,
-                repeat: Infinity,
-                repeatDelay: 1.8,
-                ease: "easeOut",
-                delay: 0.2
-            }}
-        >
-            <div className="w-4 h-4 border border-orange-300 rounded-full" />
-        </motion.div>
+    <div className="relative w-12 h-12 flex items-center justify-center bg-primary-50 rounded-2xl group-hover:bg-primary-600 transition-colors duration-500">
+        <MapPin className="w-6 h-6 text-primary-600 group-hover:text-white transition-colors duration-500" />
     </div>
 )
 
-// Component cho icon package với hiệu ứng đóng gói
+const AnimatedPhone = () => (
+    <div className="relative w-12 h-12 flex items-center justify-center bg-primary-50 rounded-2xl group-hover:bg-primary-600 transition-colors duration-500">
+        <Phone className="w-6 h-6 text-primary-600 group-hover:text-white transition-colors duration-500" />
+    </div>
+)
+
 const AnimatedPackage = () => (
-    <div className="relative">
-        <motion.div
-            animate={{
-                y: [0, -2, 0],
-                rotateY: [0, 10, -10, 0]
-            }}
-            transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-            }}
-        >
-            <Package className="w-8 h-8 text-orange-600" />
-        </motion.div>
-        {/* Băng keo đóng gói */}
-        <motion.div
-            className="absolute top-1/2 left-0 right-0 h-0.5 bg-orange-400"
-            initial={{ scaleX: 0 }}
-            animate={{
-                scaleX: [0, 1, 1, 0],
-            }}
-            transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-            }}
-        />
-        <motion.div
-            className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-orange-400"
-            initial={{ scaleY: 0 }}
-            animate={{
-                scaleY: [0, 1, 1, 0],
-            }}
-            transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.5
-            }}
-        />
+    <div className="relative w-12 h-12 flex items-center justify-center bg-primary-50 rounded-2xl group-hover:bg-primary-600 transition-colors duration-500">
+        <Package className="w-6 h-6 text-primary-600 group-hover:text-white transition-colors duration-500" />
     </div>
 )
 
 const services = [
     {
         icon: AnimatedTruck,
-        title: "Vận chuyển hàng hóa",
-        description: "Dịch vụ vận chuyển hàng hóa an toàn, nhanh chóng từ Bắc vào Nam với đội xe đa dạng từ 1-10 tấn.",
-        features: ["Đa dạng loại xe", "Tài xế kinh nghiệm", "Theo dõi hành trình"]
+        title: "Vận tải Đa phương thức",
+        description: "Giải pháp vận chuyển hàng hóa linh hoạt, tối ưu chi phí với đội xe chuyên dụng hiện đại.",
+        features: ["Đội xe 1-15 tấn", "Vận tải Bắc - Nam", "Hệ thống GPS 24/7"]
     },
     {
         icon: AnimatedClock,
-        title: "Giao hàng nhanh",
-        description: "Cam kết thời gian giao hàng nhanh nhất, đúng hẹn với hệ thống logistics hiện đại.",
-        features: ["Giao hàng trong ngày", "Theo dõi real-time", "Báo cáo tiến độ"]
+        title: "Logistics Tốc hành",
+        description: "Cam kết thời gian giao hàng chuẩn xác, quy trình vận hành tinh gọn cho doanh nghiệp.",
+        features: ["Giao nhận 24h", "Xử lý đơn hàng nhanh", "Đúng hẹn 99.9%"]
     },
     {
         icon: AnimatedShield,
-        title: "Bảo hiểm hàng hóa",
-        description: "Toàn bộ hàng hóa được bảo hiểm 100% giá trị, đảm bảo an toàn tuyệt đối.",
-        features: ["Bảo hiểm toàn diện", "Bồi thường nhanh chóng", "Quy trình minh bạch"]
+        title: "Bảo hiểm Rủi ro 100%",
+        description: "An tâm tuyệt đối với gói bảo hiểm hàng hóa toàn diện, đền bù minh bạch và nhanh chóng.",
+        features: ["Hợp đồng bảo hiểm", "Giám định chuyên nghiệp", "Bồi thường 1:1"]
     },
     {
         icon: AnimatedMapPin,
-        title: "Phủ sóng toàn quốc",
-        description: "Mạng lưới vận chuyển bao phủ toàn quốc, từ các thành phố lớn đến vùng sâu vùng xa.",
-        features: ["63 tỉnh thành", "Mạng lưới rộng khắp", "Kho bãi chiến lược"]
+        title: "Mạng lưới Toàn quốc",
+        description: "Hệ thống kho bãi và điểm trung chuyển trải dài khắp 63 tỉnh thành Việt Nam.",
+        features: ["Phủ sóng 63 tỉnh", "Kho bãi hiện đại", "Kết nối liên vùng"]
     },
     {
         icon: AnimatedPhone,
-        title: "Hỗ trợ 24/7",
-        description: "Đội ngũ chăm sóc khách hàng chuyên nghiệp, sẵn sàng hỗ trợ 24/7.",
-        features: ["Hotline 24/7", "Tư vấn miễn phí", "Xử lý khiếu nại nhanh"]
+        title: "Chăm sóc Chuyên biệt",
+        description: "Đội ngũ chuyên viên hỗ trợ riêng biệt cho từng đối tác doanh nghiệp, sẵn sàng 24/7.",
+        features: ["Quản lý tài khoản riêng", "Tư vấn giải pháp", "Hỗ trợ kỹ thuật"]
     },
     {
         icon: AnimatedPackage,
-        title: "Đóng gói chuyên nghiệp",
-        description: "Dịch vụ đóng gói hàng hóa chuyên nghiệp, đảm bảo an toàn trong quá trình vận chuyển.",
-        features: ["Vật liệu chất lượng", "Kỹ thuật chuyên nghiệp", "Tùy chỉnh theo yêu cầu"]
+        title: "Đóng gói & Lưu kho",
+        description: "Dịch vụ đóng gói tiêu chuẩn công nghiệp và lưu kho an toàn trong hệ thống kho chuẩn.",
+        features: ["Đóng gói pallet", "Lưu kho ngắn/dài hạn", "Kiểm soát tồn kho"]
     }
 ]
 
-export default function Services() {
+export default function Services({ limit }: { limit?: number }) {
+    const displayedServices = limit ? services.slice(0, limit) : services
+
     return (
-        <section id="services" className="py-20 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 relative overflow-hidden">
-            {/* Background Decorative Elements */}
-            <div className="absolute inset-0 opacity-20">
-                <div className="absolute top-10 left-10 w-72 h-72 bg-orange-400 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-                <div className="absolute top-40 right-10 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-700"></div>
-                <div className="absolute bottom-10 left-1/2 w-72 h-72 bg-indigo-400 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"></div>
-            </div>
+        <section id="services" className="py-24 bg-slate-50 relative overflow-hidden">
+            {/* Background Texture */}
+            <div className="absolute inset-x-0 top-0 h-40 bg-white/50"></div>
+            <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-primary-50/50 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2"></div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header Section */}
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
+                <div className="text-center mb-20">
                     <motion.div
-                        className="inline-flex items-center px-4 py-2 bg-orange-100 text-orange-800 rounded-full text-sm font-medium mb-4"
-                        initial={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
                         viewport={{ once: true }}
+                        className="inline-flex items-center space-x-2 bg-primary-100 px-4 py-2 rounded-full mb-6"
                     >
-                        <Truck className="w-4 h-4 mr-2" />
-                        Dịch vụ chuyên nghiệp
+                        <Star className="w-4 h-4 text-primary-600 fill-primary-600" />
+                        <span className="text-primary-700 text-xs font-black uppercase tracking-widest">Dịch vụ tiêu chuẩn quốc tế</span>
                     </motion.div>
 
                     <motion.h2
-                        className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.3 }}
                         viewport={{ once: true }}
+                        className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight"
                     >
-                        Dịch vụ vận tải{' '}
-                        <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
-                            chuyên nghiệp
-                        </span>
+                        Giải Pháp <span className="text-primary-600">Vận Tải Hoàn Hảo</span> <br />
+                        Cho Mọi Doanh Nghiệp
                     </motion.h2>
 
                     <motion.p
-                        className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
                         viewport={{ once: true }}
+                        className="text-lg text-slate-500 max-w-2xl mx-auto"
                     >
-                        Chúng tôi cung cấp giải pháp vận tải toàn diện với dịch vụ đa dạng,
-                        đáp ứng mọi nhu cầu vận chuyển hàng hóa của bạn
+                        Chúng tôi không chỉ vận chuyển hàng hóa, chúng tôi xây dựng sự tin cậy thông qua những quy trình logistics hiện đại và chuyên nghiệp nhất.
                     </motion.p>
-                </motion.div>
+                </div>
 
                 {/* Services Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                    {services.map((service, index) => (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+                    {displayedServices.map((service, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 50 }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            whileHover={{
-                                y: -10,
-                                transition: { duration: 0.3 }
-                            }}
-                            className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg shadow-orange-500/10 hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-300 border border-white/50 hover:border-orange-200 group relative overflow-hidden"
+                            transition={{ delay: index * 0.1 }}
+                            className="group bg-white p-8 rounded-[2rem] border border-slate-100 hover:border-primary-100 enterprise-shadow transition-all duration-500 hover:-translate-y-2 relative overflow-hidden"
                         >
-                            {/* Hover Background Effect */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 to-amber-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-primary-50/20 rounded-full blur-2xl translate-x-16 -translate-y-16 group-hover:translate-x-8 transition-transform duration-700"></div>
 
                             <div className="relative z-10">
-                                <motion.div
-                                    className="flex items-center mb-6"
-                                    whileHover={{ scale: 1.05 }}
-                                    transition={{ type: "spring", stiffness: 300 }}
-                                >
-                                    <div className="bg-gradient-to-br from-orange-100 to-amber-100 p-4 rounded-xl mr-4 group-hover:from-orange-200 group-hover:to-amber-200 transition-all duration-300 shadow-md">
-                                        <service.icon />
-                                    </div>
-                                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors duration-300">
-                                        {service.title}
-                                    </h3>
-                                </motion.div>
+                                <service.icon />
 
-                                <p className="text-gray-600 mb-6 leading-relaxed">
+                                <h3 className="text-xl font-black text-slate-900 mt-6 mb-4">{service.title}</h3>
+
+                                <p className="text-slate-500 text-sm leading-relaxed mb-8 h-12 overflow-hidden">
                                     {service.description}
                                 </p>
 
                                 <ul className="space-y-3">
-                                    {service.features.map((feature, featureIndex) => (
-                                        <motion.li
-                                            key={featureIndex}
-                                            className="flex items-center text-sm text-gray-700"
-                                            initial={{ opacity: 0, x: -20 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            transition={{ duration: 0.5, delay: (index * 0.1) + (featureIndex * 0.1) }}
-                                            viewport={{ once: true }}
-                                        >
-                                            <motion.div
-                                                className="w-2 h-2 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full mr-3"
-                                                whileHover={{ scale: 1.5 }}
-                                                transition={{ type: "spring", stiffness: 300 }}
-                                            />
+                                    {service.features.map((feature, fIdx) => (
+                                        <li key={fIdx} className="flex items-center text-xs font-bold text-slate-600">
+                                            <CheckCircle2 className="w-4 h-4 text-emerald-500 mr-2 shrink-0" />
                                             {feature}
-                                        </motion.li>
+                                        </li>
                                     ))}
                                 </ul>
+
+                                <div className="mt-8 pt-6 border-t border-slate-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center text-primary-600 text-xs font-black uppercase tracking-widest cursor-pointer">
+                                    Chi tiết dịch vụ <ArrowRight className="ml-2 w-4 h-4" />
+                                </div>
                             </div>
                         </motion.div>
                     ))}
                 </div>
 
-                {/* CTA Section */}
+                {/* Partnership Invitation Card */}
                 <motion.div
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="text-center"
+                    className="relative rounded-[3rem] overflow-hidden bg-slate-900 border border-white/10"
                 >
-                    <div className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
-                        {/* Background Pattern */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-16 translate-x-16" />
-                        <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-12 -translate-x-12" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(37,99,235,0.2),transparent_50%)]"></div>
+                    <div className="absolute top-0 right-0 w-1/2 h-full">
+                        <Image
+                            src="/images/partnership_bg.png"
+                            alt="Partnership"
+                            fill
+                            className="object-cover opacity-30 mix-blend-overlay"
+                        />
+                    </div>
 
-                        <div className="relative z-10">
-                            <motion.h3
-                                className="text-3xl md:text-4xl font-bold mb-4"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.2 }}
-                                viewport={{ once: true }}
-                            >
-                                Bạn là doanh nghiệp cần vận chuyển hàng ngày?
-                            </motion.h3>
+                    <div className="relative z-10 p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-left">
+                        <div className="max-w-xl">
+                            <div className="inline-flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full mb-6">
+                                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                                <span className="text-white text-[10px] font-black uppercase tracking-widest">Hỗ trợ đối tác mới</span>
+                            </div>
+                            <h3 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight tracking-tight">
+                                Đồng Hành Cùng <br /> Phái Triển Doanh Nghiệp
+                            </h3>
+                            <p className="text-slate-400 text-lg mb-8 leading-relaxed">
+                                Đăng ký trở thành đối tác chiến lược của 62 Dương Lê để nhận được ưu đãi vận chuyển linh hoạt và ưu tiên vận hành hàng đầu.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                                <Link href="/#contact" className="px-10 py-5 bg-white text-slate-900 rounded-2xl font-black text-lg hover:bg-primary-50 transition-all shadow-xl">
+                                    🤝 Đăng ký đối tác
+                                </Link>
+                                <Link href="tel:0931879070" className="px-10 py-5 bg-white/10 text-white border border-white/20 backdrop-blur-md rounded-2xl font-black text-lg hover:bg-white/20 transition-all">
+                                    📞 Gọi 0931.879.070
+                                </Link>
+                            </div>
+                        </div>
 
-                            <motion.p
-                                className="text-xl mb-8 text-orange-100 max-w-2xl mx-auto"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.3 }}
-                                viewport={{ once: true }}
-                            >
-                                Trở thành đối tác để nhận <strong>giảm giá đến 30%</strong> và tận hưởng nhiều quyền lợi đặc biệt
-                            </motion.p>
-
-                            <motion.div
-                                className="flex flex-col sm:flex-row gap-4 justify-center"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.4 }}
-                                viewport={{ once: true }}
-                            >
-                                <motion.button
-                                    className="bg-white text-orange-600 px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-yellow-300"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => {
-                                        document.getElementById('partnership-booster')?.scrollIntoView({ behavior: 'smooth' })
-                                    }}
-                                >
-                                    🤝 Đăng ký đối tác ngay
-                                </motion.button>
-
-                                <motion.button
-                                    className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-orange-600 transition-all duration-300"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => {
-                                        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                                    }}
-                                >
-                                    💬 Tư vấn miễn phí
-                                </motion.button>
-                            </motion.div>
-
-                            {/* Partnership Benefits */}
-                            <motion.div
-                                className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5 }}
-                                viewport={{ once: true }}
-                            >
-                                <div className="bg-white/15 backdrop-blur-sm rounded-xl p-3">
-                                    <div className="text-2xl font-bold">30%</div>
-                                    <div className="text-xs text-orange-100">Giảm giá tối đa</div>
+                        <div className="grid grid-cols-2 gap-4 w-full md:w-auto">
+                            {[
+                                { label: 'Doanh nghiệp', value: '500+' },
+                                { label: 'Tỉnh thành', value: '63' },
+                                { label: 'Xe vận tải', value: '100+' },
+                                { label: 'An toàn hỏa tốc', value: '100%' },
+                            ].map((stat, idx) => (
+                                <div key={idx} className="bg-white/5 border border-white/10 p-6 rounded-3xl text-center backdrop-blur-sm">
+                                    <div className="text-2xl font-black text-primary-400 tracking-tighter mb-1">{stat.value}</div>
+                                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{stat.label}</div>
                                 </div>
-                                <div className="bg-white/15 backdrop-blur-sm rounded-xl p-3">
-                                    <div className="text-2xl font-bold">24/7</div>
-                                    <div className="text-xs text-orange-100">Hỗ trợ riêng</div>
-                                </div>
-                                <div className="bg-white/15 backdrop-blur-sm rounded-xl p-3">
-                                    <div className="text-2xl font-bold">VIP</div>
-                                    <div className="text-xs text-orange-100">Ưu tiên cao</div>
-                                </div>
-                                <div className="bg-white/15 backdrop-blur-sm rounded-xl p-3">
-                                    <div className="text-2xl font-bold">+45%</div>
-                                    <div className="text-xs text-orange-100">Tăng hiệu quả</div>
-                                </div>
-                            </motion.div>
+                            ))}
                         </div>
                     </div>
                 </motion.div>

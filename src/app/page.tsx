@@ -25,69 +25,54 @@ import VideoTestimonials from '@/components/VideoTestimonials'
 export default function Home() {
     return (
         <main>
-            <TableOfContents />
+            {/* Màn hình 1: Hero & Báo giá - Điểm chạm đầu tiên quan trọng nhất */}
             <section id="hero">
                 <Hero />
             </section>
+
+            {/* Màn hình 2: Bằng chứng năng lực & Đối tác - Xây dựng niềm tin ngay lập tức */}
             <section id="partnership-booster">
                 <PartnershipBooster />
             </section>
+
+            {/* Màn hình 3: Dịch vụ cốt lõi - Hiển thị 3 giải pháp chính */}
             <section id="services">
-                <Services />
+                <Services limit={3} />
             </section>
+
+            {/* Màn hình 4: Năng lực vận tải - Đội xe và Chỉ số (Stats gộp vào đây hoặc liền kề) */}
             <section id="truck-types">
                 <TruckTypes />
             </section>
-            <section id="price-calculator">
-                <PriceCalculator />
-            </section>
-            <section id="roi-calculator">
-                <ROICalculator />
-            </section>
-            <section id="tracking">
-                <TrackingSection />
-            </section>
-            <section id="about">
-                <About />
-            </section>
+
             <section id="stats">
                 <Stats />
             </section>
-            <section id="trust-builder">
-                <TrustBuilder />
-            </section>
-            <section id="detailed-case-studies">
-                <DetailedCaseStudies />
-            </section>
-            <section id="partnership-journey">
-                <PartnershipJourney />
-            </section>
-            <section id="video-testimonials">
-                <VideoTestimonials />
-            </section>
+
+            {/* Màn hình 5: Chứng nhận & Uy tín */}
             <section id="certifications">
                 <Certifications />
             </section>
+
             <section id="partners">
                 <Partners />
             </section>
-            <section id="partnership-onboarding">
-                <PartnershipOnboarding />
-            </section>
-            <section id="testimonials">
-                <Testimonials />
-            </section>
-            <section id="faq">
-                <FAQ />
-            </section>
-            <section id="news">
-                <NewsSection />
-            </section>
+
+            {/* Màn hình 6: Liên hệ & Chân trang */}
             <section id="contact">
                 <Contact />
             </section>
+
             <StickyPartnershipCTA />
             <LiveChat />
+
+            {/* 
+               Các Section sau đây được tạm thời ẩn khỏi trang chủ để giảm nhiễu thông tin.
+               Chúng có thể được truy cập qua Navigation hoặc trang con:
+               - PriceCalculator, ROICalculator, TrackingSection
+               - About, TrustBuilder, DetailedCaseStudies, PartnershipJourney
+               - VideoTestimonials, PartnershipOnboarding, Testimonials, FAQ, NewsSection
+            */}
         </main>
     )
 }

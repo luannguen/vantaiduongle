@@ -2,7 +2,7 @@
 
 import { useLanguage } from '@/contexts/LanguageContext'
 import { motion } from 'framer-motion'
-import { ArrowRight, Clock, MapPin, Shield } from 'lucide-react'
+import { ArrowRight, Clock, MapPin, Shield, CheckCircle2, Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -10,324 +10,191 @@ export default function Hero() {
     const { t } = useLanguage()
 
     return (
-        <section id="home" className="relative overflow-hidden min-h-screen flex items-center">
-            {/* Background Image */}
+        <section id="home" className="relative overflow-hidden min-h-screen flex items-center pt-20">
+            {/* Background Image with Premium Overlay */}
             <div className="absolute inset-0 z-0">
                 <Image
                     src="/images/hero-bg.jpg"
-                    alt="Hero Background"
+                    alt="Enterprise Transport"
                     fill
-                    className="object-cover"
+                    className="object-cover scale-105"
                     priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-orange-900/85 to-amber-900/80"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/90 to-primary-900/40"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(30,64,175,0.15),transparent_50%)]"></div>
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    {/* Left content */}
+            {/* Decorative Light Rays */}
+            <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-primary-500/20 to-transparent rotate-12 blur-sm"></div>
+            <div className="absolute top-0 left-1/3 w-px h-full bg-gradient-to-b from-transparent via-primary-400/10 to-transparent rotate-12 blur-sm"></div>
+
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+                <div className="grid lg:grid-cols-2 gap-16 items-center">
+                    {/* Left content: Value Proposition */}
                     <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="text-left"
                     >
-                        <motion.h1
-                            className="section-title text-5xl lg:text-6xl text-white mb-6"
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.3 }}
+                            className="inline-flex items-center space-x-2 bg-primary-500/10 backdrop-blur-md border border-primary-400/30 px-4 py-2 rounded-full mb-8"
                         >
-                            <motion.span
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 0.8, delay: 0.4 }}
-                            >
-                                {t('heroTitle')}
-                            </motion.span>
-                            <motion.span
-                                className="text-amber-400 block"
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.8, delay: 0.6 }}
-                            >
-                                Từ Bắc vào Nam
-                            </motion.span>
+                            <Star className="w-4 h-4 text-secondary-400 fill-secondary-400" />
+                            <span className="text-primary-100 text-xs font-bold tracking-widest uppercase">Đối tác Vận tải Doanh nghiệp Hàng đầu</span>
+                        </motion.div>
+
+                        <motion.h1
+                            className="text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight"
+                        >
+                            Vận Chuyển <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 via-primary-200 to-white">Chuyên Nghiệp</span> <br />
+                            Tầm Vóc Quốc Gia
                         </motion.h1>
 
                         <motion.p
-                            className="text-xl text-orange-100 mb-8 leading-relaxed"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.8 }}
+                            className="text-lg text-slate-300 mb-10 leading-relaxed max-w-xl"
                         >
-                            ✅ Xe tải từ 1-10 tấn | 🚛 Vận chuyển Bắc - Nam | 🔒 Bảo hiểm 100% | ⚡ Giao hàng nhanh 24-48h
-                            <br />
-                            <span className="bg-gradient-to-r from-yellow-300 to-orange-300 text-orange-900 px-3 py-1 rounded-full text-lg font-bold animate-pulse">
-                                🎉 Đặc biệt: Tặng 20% phí vận chuyển cho đối tác mới!
-                            </span>
+                            Chúng tôi cung cấp giải pháp logistics toàn diện cho doanh nghiệp với đội xe hiện đại, cam kết an toàn tuyệt đối và thời gian giao hàng chuẩn xác 24/7.
                         </motion.p>
 
-                        {/* Features */}
-                        <motion.div
-                            className="grid sm:grid-cols-3 gap-4 mb-8"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 1.0 }}
-                        >
-                            <motion.div
-                                className="flex items-center hover-lift"
-                                whileHover={{ scale: 1.05 }}
-                                transition={{ type: "spring", stiffness: 300 }}
-                            >
-                                <MapPin className="w-5 h-5 text-amber-400 mr-2 animate-pulse-slow" />
-                                <span className="text-white">Toàn quốc</span>
-                            </motion.div>
-                            <motion.div
-                                className="flex items-center hover-lift"
-                                whileHover={{ scale: 1.05 }}
-                                transition={{ type: "spring", stiffness: 300 }}
-                            >
-                                <Clock className="w-5 h-5 text-emerald-400 mr-2 animate-pulse-slow" />
-                                <span className="text-white">24/7</span>
-                            </motion.div>
-                            <motion.div
-                                className="flex items-center hover-lift"
-                                whileHover={{ scale: 1.05 }}
-                                transition={{ type: "spring", stiffness: 300 }}
-                            >
-                                <Shield className="w-5 h-5 text-cyan-400 mr-2 animate-pulse-slow" />
-                                <span className="text-white">Bảo hiểm</span>
-                            </motion.div>
-                        </motion.div>
+                        {/* Feature Badges */}
+                        <div className="grid grid-cols-2 gap-4 mb-10">
+                            {[
+                                { icon: Shield, text: 'Bảo hiểm 100%', color: 'text-emerald-400' },
+                                { icon: Clock, text: 'Giao hàng 24h', color: 'text-primary-400' },
+                                { icon: CheckCircle2, text: 'Hợp đồng minh bạch', color: 'text-secondary-400' },
+                                { icon: MapPin, text: 'Toàn quốc', color: 'text-rose-400' },
+                            ].map((item, idx) => (
+                                <motion.div
+                                    key={idx}
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: 0.5 + idx * 0.1 }}
+                                    className="flex items-center space-x-2 bg-white/5 backdrop-blur-sm border border-white/10 p-2.5 rounded-xl"
+                                >
+                                    <item.icon className={`w-4 h-4 ${item.color}`} />
+                                    <span className="text-slate-200 text-xs font-bold">{item.text}</span>
+                                </motion.div>
+                            ))}
+                        </div>
 
-                        <motion.div
-                            className="flex flex-col sm:flex-row gap-4"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 1.2 }}
-                        >
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -2 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="flex-1"
-                            >
-                                <Link href="/#partnership-booster" className="bg-gradient-to-r from-green-400 to-emerald-400 text-slate-900 px-8 py-4 rounded-lg hover:from-green-300 hover:to-emerald-300 transition-all duration-300 font-bold text-lg flex items-center justify-center hover-lift shadow-lg shadow-green-500/25 border-2 border-yellow-300">
-                                    🤝 Đăng ký đối tác
-                                    <ArrowRight className="w-5 h-5 ml-2" />
-                                </Link>
-                            </motion.div>
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -2 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="flex-1"
-                            >
-                                <Link href="/#contact" className="bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 px-8 py-4 rounded-lg hover:from-amber-300 hover:to-orange-300 transition-all duration-300 font-bold text-lg flex items-center justify-center hover-lift shadow-lg shadow-amber-500/25">
-                                    {t('getQuote')}
-                                    <ArrowRight className="w-5 h-5 ml-2" />
-                                </Link>
-                            </motion.div>
-                        </motion.div>
-
-                        {/* Partnership Call-out */}
-                        <motion.div
-                            className="mt-6 text-center"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.8, delay: 1.4 }}
-                        >
-                            <div className="bg-gradient-to-r from-yellow-400/20 to-orange-400/20 backdrop-blur-sm border border-yellow-300/50 rounded-xl px-6 py-3 inline-block">
-                                <div className="flex items-center text-yellow-100">
-                                    <div className="w-2 h-2 bg-yellow-400 rounded-full mr-3 animate-pulse"></div>
-                                    <span className="text-sm font-semibold">
-                                        🚀 Mở cửa tuyển đối tác mới: Chỉ 50 suất trong tháng 12!
-                                    </span>
-                                </div>
-                            </div>
-                        </motion.div>
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <Link href="/#contact" className="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold text-lg enterprise-shadow transition-all flex items-center justify-center group">
+                                Bắt đầu ngay
+                                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                            <Link href="/#about" className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md rounded-xl font-bold text-lg transition-all text-center">
+                                Tìm hiểu thêm
+                            </Link>
+                        </div>
                     </motion.div>
 
-                    {/* Right content - Quote Form */}
+                    {/* Right content: Smart Quote Form - Premium Glass Card */}
                     <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="relative"
                     >
-                        <motion.div
-                            className="bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-white/20 overflow-hidden relative"
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
-                        >
-                            {/* Background gradient overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-orange-50/80 via-white/90 to-amber-50/80 -z-10"></div>
+                        {/* Elegant glow effect behind card */}
+                        <div className="absolute -inset-4 bg-primary-500/20 rounded-[2rem] blur-3xl -z-10 animate-pulse"></div>
 
-                            <motion.div
-                                className="text-center mb-6"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 0.6 }}
-                            >
-                                <div className="flex items-center justify-center mb-3">
-                                    <div className="bg-gradient-to-r from-orange-500 to-amber-500 p-2 rounded-lg mr-3">
-                                        <Shield className="w-6 h-6 text-white" />
+                        <div className="glass-panel rounded-3xl p-8 border border-white/20 relative overflow-hidden">
+                            {/* Form Header */}
+                            <div className="mb-8 relative z-10">
+                                <h3 className="text-xl font-black text-slate-900 mb-2">Yêu Cầu Báo Giá</h3>
+                                <p className="text-slate-400 text-xs font-medium">Nhận phản hồi chuyên biệt sau 5 phút.</p>
+                            </div>
+
+                            <form className="space-y-5 relative z-10">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-widest text-primary-700 ml-1">Lộ trình khởi hành</label>
+                                        <div className="relative">
+                                            <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                            <input
+                                                type="text"
+                                                placeholder="Điểm đi (Tỉnh/Thành)"
+                                                className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary-500 transition-all outline-none text-sm text-slate-900"
+                                            />
+                                        </div>
                                     </div>
-                                    <h3 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
-                                        Báo giá miễn phí
-                                    </h3>
-                                </div>
-                                <p className="text-gray-600 text-sm">
-                                    ⚡ Nhận báo giá chính xác trong vòng 5 phút
-                                </p>
-                            </motion.div>
-
-                            <motion.form
-                                className="space-y-4"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 0.8 }}
-                            >
-                                <div className="grid grid-cols-1 gap-4">
-                                    <div className="relative">
-                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                            📍 Điểm đi
-                                        </label>
-                                        <input
-                                            type="text"
-                                            placeholder="Ví dụ: Hà Nội, Quận Ba Đình"
-                                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300 bg-white/80 backdrop-blur-sm text-gray-800 placeholder-gray-400"
-                                        />
-                                    </div>
-
-                                    <div className="relative">
-                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                            🎯 Điểm đến
-                                        </label>
-                                        <input
-                                            type="text"
-                                            placeholder="Ví dụ: TP.HCM, Quận 1"
-                                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300 bg-white/80 backdrop-blur-sm text-gray-800 placeholder-gray-400"
-                                        />
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-widest text-primary-700 ml-1">Lộ trình kết thúc</label>
+                                        <div className="relative">
+                                            <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                            <input
+                                                type="text"
+                                                placeholder="Điểm đến (Tỉnh/Thành)"
+                                                className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary-500 transition-all outline-none text-sm text-slate-900"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-3">
-                                    <div>
-                                        <label htmlFor="weight" className="block text-sm font-semibold text-gray-700 mb-2">
-                                            ⚖️ Trọng lượng
-                                        </label>
-                                        <select
-                                            id="weight"
-                                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300 bg-white/80 backdrop-blur-sm text-gray-800"
-                                        >
-                                            <option>Dưới 1 tấn</option>
-                                            <option>1-2 tấn</option>
-                                            <option>2-5 tấn</option>
-                                            <option>5-10 tấn</option>
-                                            <option>Trên 10 tấn</option>
-                                        </select>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="cargoType" className="block text-sm font-semibold text-gray-700 mb-2">
-                                            📦 Loại hàng
-                                        </label>
-                                        <select
-                                            id="cargoType"
-                                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300 bg-white/80 backdrop-blur-sm text-gray-800"
-                                        >
-                                            <option>Hàng thường</option>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-widest text-primary-700 ml-1">Loại hàng vận chuyển</label>
+                                        <select className="w-full px-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary-500 transition-all outline-none text-sm text-slate-600 appearance-none cursor-pointer">
+                                            <option>Hàng bách hóa</option>
                                             <option>Hàng dễ vỡ</option>
-                                            <option>Hàng lạnh</option>
-                                            <option>Hàng nguy hiểm</option>
-                                            <option>Thiết bị y tế</option>
+                                            <option>Hàng công nghiệp</option>
+                                            <option>Khác...</option>
+                                        </select>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-widest text-primary-700 ml-1">Khối lượng ước tính</label>
+                                        <select className="w-full px-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary-500 transition-all outline-none text-sm text-slate-600 appearance-none cursor-pointer">
+                                            <option>Dưới 1 tấn</option>
+                                            <option>1 - 5 tấn</option>
+                                            <option>5 - 15 tấn</option>
+                                            <option>Trên 15 tấn</option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div>
-                                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                        📱 Số điện thoại (tùy chọn)
-                                    </label>
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black uppercase tracking-widest text-primary-700 ml-1">Số điện thoại liên hệ</label>
                                     <input
                                         type="tel"
-                                        placeholder="Để nhận kết quả nhanh hơn"
-                                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300 bg-white/80 backdrop-blur-sm text-gray-800 placeholder-gray-400"
+                                        placeholder="Để chuyên viên tư vấn gọi lại ngay"
+                                        className="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary-500 transition-all outline-none text-sm text-slate-900"
                                     />
                                 </div>
 
-                                <motion.button
-                                    type="submit"
-                                    className="w-full bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
+                                <button
+                                    className="w-full py-5 bg-gradient-to-r from-primary-700 to-primary-900 text-white rounded-2xl font-black text-lg shadow-xl hover:shadow-primary-900/40 hover:-translate-y-1 transition-all flex items-center justify-center space-x-3 group"
                                 >
-                                    <div className="absolute inset-0 bg-gradient-to-r from-orange-700 via-amber-700 to-yellow-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                    <div className="relative flex items-center justify-center">
-                                        <span>🚚 Nhận báo giá ngay</span>
-                                        <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                                    </div>
-                                </motion.button>
-                            </motion.form>
+                                    <span>Gửi Yêu Cầu Ngay</span>
+                                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                </button>
 
-                            {/* Trust indicators */}
-                            <motion.div
-                                className="mt-4 pt-4 border-t border-gray-200"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 1.2 }}
-                            >
-                                <div className="flex items-center justify-center text-xs text-gray-500 space-x-4">
-                                    <div className="flex items-center">
-                                        <Shield className="w-3 h-3 text-green-500 mr-1" />
-                                        <span>Bảo mật 100%</span>
-                                    </div>
-                                    <div className="flex items-center">
-                                        <Clock className="w-3 h-3 text-orange-500 mr-1" />
-                                        <span>Phản hồi 5 phút</span>
-                                    </div>
-                                    <div className="flex items-center">
-                                        <MapPin className="w-3 h-3 text-purple-500 mr-1" />
-                                        <span>Toàn quốc</span>
-                                    </div>
+                                <p className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                                    🔒 Thông tin của bạn được bảo mật tuyệt đối
+                                </p>
+                            </form>
+
+                            {/* Trust badges inside card */}
+                            <div className="mt-8 pt-6 border-t border-slate-100 flex justify-between items-center px-2">
+                                <div className="text-center">
+                                    <div className="text-lg font-black text-primary-700 tracking-tighter">500+</div>
+                                    <div className="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Doanh nghiệp thân thiết</div>
                                 </div>
-                            </motion.div>
-                        </motion.div>
-
-                        {/* Floating Elements */}
-                        <motion.div
-                            animate={{
-                                y: [0, -10, 0],
-                                rotate: [0, 5, 0]
-                            }}
-                            transition={{
-                                duration: 3,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                            }}
-                            className="absolute -top-4 -right-4 bg-yellow-400 p-4 rounded-full shadow-lg animate-glow"
-                        >
-                            <Shield className="w-8 h-8 text-orange-900" />
-                        </motion.div>
-
-                        {/* Additional floating elements */}
-                        <motion.div
-                            animate={{
-                                x: [0, 10, 0],
-                                y: [0, -5, 0]
-                            }}
-                            transition={{
-                                duration: 4,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                                delay: 1
-                            }}
-                            className="absolute -bottom-6 -left-6 bg-white p-3 rounded-full shadow-lg"
-                        >
-                            <Clock className="w-6 h-6 text-orange-600" />
-                        </motion.div>
+                                <div className="h-8 w-px bg-slate-100"></div>
+                                <div className="text-center">
+                                    <div className="text-lg font-black text-primary-700 tracking-tighter">15+</div>
+                                    <div className="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Năm kinh nghiệm</div>
+                                </div>
+                                <div className="h-8 w-px bg-slate-100"></div>
+                                <div className="text-center">
+                                    <div className="text-lg font-black text-primary-700 tracking-tighter">24/7</div>
+                                    <div className="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Hỗ trợ vận hành</div>
+                                </div>
+                            </div>
+                        </div>
                     </motion.div>
                 </div>
             </div>

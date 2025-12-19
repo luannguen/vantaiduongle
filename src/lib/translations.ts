@@ -7,8 +7,11 @@ export const translations = {
         services: 'Dịch vụ',
         trucks: 'Loại xe',
         about: 'Về chúng tôi',
+        partners: 'Đối tác',
         contact: 'Liên hệ',
         bookNow: 'Đặt xe ngay',
+        logisticsCompany: 'CÔNG TY VẬN TẢI LOGISTICS',
+        partnershipCTA: 'Hợp tác doanh nghiệp',
 
         // Hero
         heroTitle: getCompanyName('vi'),
@@ -61,8 +64,11 @@ export const translations = {
         services: 'Services',
         trucks: 'Truck Types',
         about: 'About Us',
+        partners: 'Partners',
         contact: 'Contact',
         bookNow: 'Book Now',
+        logisticsCompany: 'LOGISTICS TRANSPORT COMPANY',
+        partnershipCTA: 'Business Partnership',
 
         // Hero
         heroTitle: getCompanyName('en'),
