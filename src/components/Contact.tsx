@@ -219,7 +219,18 @@ const offices = [
     }
 ];
 
+import { useContactForm } from '@/hooks/features/useContactForm';
+
 export default function Contact() {
+    const {
+        formData,
+        isLoading,
+        error,
+        isSuccess,
+        handleChange,
+        handleSubmit
+    } = useContactForm();
+
     const fadeInUp = {
         initial: { opacity: 0, y: 60 },
         animate: { opacity: 1, y: 0 },
@@ -365,7 +376,7 @@ export default function Contact() {
                                 </h3>
                             </div>
 
-                            <form className="space-y-6">
+                            <form className="space-y-6" onSubmit={handleSubmit}>
                                 <div className="grid md:grid-cols-2 gap-4">
                                     <motion.div
                                         initial={{ opacity: 0, y: 20 }}
@@ -380,6 +391,8 @@ export default function Contact() {
                                             id="name"
                                             type="text"
                                             required
+                                            value={formData.name}
+                                            onChange={handleChange}
                                             className="w-full px-4 py-3 border border-orange-200 rounded-xl focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all duration-300 hover:border-orange-300 bg-white/80 backdrop-blur-sm"
                                             placeholder="Nhập họ và tên"
                                         />
@@ -397,6 +410,8 @@ export default function Contact() {
                                             id="phone"
                                             type="tel"
                                             required
+                                            value={formData.phone}
+                                            onChange={handleChange}
                                             className="w-full px-4 py-3 border border-orange-200 rounded-xl focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all duration-300 hover:border-orange-300 bg-white/80 backdrop-blur-sm"
                                             placeholder="Nhập số điện thoại"
                                         />
@@ -415,6 +430,8 @@ export default function Contact() {
                                     <input
                                         id="email"
                                         type="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
                                         className="w-full px-4 py-3 border border-orange-200 rounded-xl focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all duration-300 hover:border-orange-300 bg-white/80 backdrop-blur-sm"
                                         placeholder="Nhập địa chỉ email"
                                     />
@@ -434,6 +451,8 @@ export default function Contact() {
                                             id="origin"
                                             type="text"
                                             required
+                                            value={formData.origin}
+                                            onChange={handleChange}
                                             className="w-full px-4 py-3 border border-orange-200 rounded-xl focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all duration-300 hover:border-orange-300 bg-white/80 backdrop-blur-sm"
                                             placeholder="Nhập điểm đi"
                                         />
@@ -451,6 +470,8 @@ export default function Contact() {
                                             id="destination"
                                             type="text"
                                             required
+                                            value={formData.destination}
+                                            onChange={handleChange}
                                             className="w-full px-4 py-3 border border-orange-200 rounded-xl focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all duration-300 hover:border-orange-300 bg-white/80 backdrop-blur-sm"
                                             placeholder="Nhập điểm đến"
                                         />
@@ -469,14 +490,16 @@ export default function Contact() {
                                         </label>
                                         <select
                                             id="truckType"
+                                            value={formData.truckType}
+                                            onChange={handleChange}
                                             className="w-full px-4 py-3 border border-orange-200 rounded-xl focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all duration-300 hover:border-orange-300 bg-white/80 backdrop-blur-sm"
                                         >
-                                            <option>Chọn loại xe</option>
-                                            <option>1 tấn</option>
-                                            <option>2 tấn</option>
-                                            <option>5 tấn</option>
-                                            <option>10 tấn</option>
-                                            <option>Xe chuyên dụng</option>
+                                            <option value="">Chọn loại xe</option>
+                                            <option value="1 tấn">1 tấn</option>
+                                            <option value="2 tấn">2 tấn</option>
+                                            <option value="5 tấn">5 tấn</option>
+                                            <option value="10 tấn">10 tấn</option>
+                                            <option value="Xe chuyên dụng">Xe chuyên dụng</option>
                                         </select>
                                     </motion.div>
                                     <motion.div
@@ -490,13 +513,15 @@ export default function Contact() {
                                         </label>
                                         <select
                                             id="cargoType"
+                                            value={formData.cargoType}
+                                            onChange={handleChange}
                                             className="w-full px-4 py-3 border border-orange-200 rounded-xl focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all duration-300 hover:border-orange-300 bg-white/80 backdrop-blur-sm"
                                         >
-                                            <option>Chọn loại hàng</option>
-                                            <option>Hàng thường</option>
-                                            <option>Hàng dễ vỡ</option>
-                                            <option>Hàng lạnh</option>
-                                            <option>Hàng nguy hiểm</option>
+                                            <option value="">Chọn loại hàng</option>
+                                            <option value="Hàng thường">Hàng thường</option>
+                                            <option value="Hàng dễ vỡ">Hàng dễ vỡ</option>
+                                            <option value="Hàng lạnh">Hàng lạnh</option>
+                                            <option value="Hàng nguy hiểm">Hàng nguy hiểm</option>
                                         </select>
                                     </motion.div>
                                 </div>
@@ -513,6 +538,8 @@ export default function Contact() {
                                     <textarea
                                         id="message"
                                         rows={4}
+                                        value={formData.message}
+                                        onChange={handleChange}
                                         className="w-full px-4 py-3 border border-orange-200 rounded-xl focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all duration-300 hover:border-orange-300 bg-white/80 backdrop-blur-sm resize-none"
                                         placeholder="Mô tả chi tiết về yêu cầu vận chuyển..."
                                     ></textarea>
@@ -520,9 +547,10 @@ export default function Contact() {
 
                                 <motion.button
                                     type="submit"
-                                    className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white py-4 rounded-xl hover:from-orange-600 hover:to-amber-600 transition-all duration-300 font-bold text-lg flex items-center justify-center shadow-lg hover:shadow-xl relative overflow-hidden group"
-                                    whileHover={{ scale: 1.02, y: -2 }}
-                                    whileTap={{ scale: 0.98 }}
+                                    disabled={isLoading}
+                                    className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white py-4 rounded-xl hover:from-orange-600 hover:to-amber-600 transition-all duration-300 font-bold text-lg flex items-center justify-center shadow-lg hover:shadow-xl relative overflow-hidden group disabled:opacity-50"
+                                    whileHover={{ scale: isLoading ? 1 : 1.02, y: isLoading ? 0 : -2 }}
+                                    whileTap={{ scale: isLoading ? 1 : 0.98 }}
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.5 }}
@@ -531,15 +559,24 @@ export default function Contact() {
                                     {/* Shimmer effect */}
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
 
-                                    <span className="relative z-10">Gửi yêu cầu</span>
-                                    <motion.div
-                                        animate={{ x: [0, 5, 0] }}
-                                        transition={{ repeat: Infinity, duration: 1.5 }}
-                                        className="relative z-10"
-                                    >
-                                        <Send className="w-5 h-5 ml-2" />
-                                    </motion.div>
+                                    <span className="relative z-10">{isLoading ? 'Đang gửi...' : 'Gửi yêu cầu'}</span>
+                                    {!isLoading && (
+                                        <motion.div
+                                            animate={{ x: [0, 5, 0] }}
+                                            transition={{ repeat: Infinity, duration: 1.5 }}
+                                            className="relative z-10"
+                                        >
+                                            <Send className="w-5 h-5 ml-2" />
+                                        </motion.div>
+                                    )}
                                 </motion.button>
+
+                                {error && (
+                                    <p className="text-red-500 text-sm font-medium mt-4 text-center">{error}</p>
+                                )}
+                                {isSuccess && (
+                                    <p className="text-green-600 text-sm font-bold mt-4 text-center">✅ Gửi yêu cầu thành công! Chúng tôi sẽ liên hệ lại sớm.</p>
+                                )}
                             </form>
                         </div>
                     </motion.div>

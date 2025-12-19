@@ -2,30 +2,24 @@
 
 import { motion } from 'framer-motion'
 import { Calculator, MapPin, Package, Truck, Weight } from 'lucide-react'
-import { useState } from 'react'
+import { usePriceCalculator } from '@/hooks/features/usePriceCalculator'
 
 export default function PriceCalculator() {
-    const [origin, setOrigin] = useState('')
-    const [destination, setDestination] = useState('')
-    const [weight, setWeight] = useState('')
-    const [truckType, setTruckType] = useState('')
-    const [estimatedCost, setEstimatedCost] = useState<number | null>(null)
+    const {
+        form,
+        estimatedCost,
+        isLoading,
+        error,
+        handleCalculate,
+        isReady
+    } = usePriceCalculator();
 
-    const calculatePrice = () => {
-        // Simple price calculation logic
-        const basePrice = {
-            '1-ton': 800000,
-            '2-ton': 1200000,
-            '5-ton': 2000000,
-            '10-ton': 3500000
-        }[truckType] || 800000
-
-        const distanceMultiplier = 1.2 // Simplified
-        const weightMultiplier = parseFloat(weight) || 1
-
-        const total = basePrice * distanceMultiplier * (weightMultiplier / 1000)
-        setEstimatedCost(total)
-    }
+    const {
+        origin, setOrigin,
+        destination, setDestination,
+        weight, setWeight,
+        truckType, setTruckType
+    } = form;
 
     return (
         <section id="pricing" className="py-20 bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 relative overflow-hidden">
@@ -128,14 +122,18 @@ export default function PriceCalculator() {
                             </div>
 
                             <motion.button
-                                onClick={calculatePrice}
-                                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                disabled={!origin || !destination || !weight || !truckType}
+                                onClick={handleCalculate}
+                                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                whileHover={{ scale: isReady ? 1.02 : 1 }}
+                                whileTap={{ scale: isReady ? 0.98 : 1 }}
+                                disabled={!isReady || isLoading}
                             >
-                                🧮 Tính giá vận chuyển
+                                {isLoading ? '⏳ Đang tính toán...' : '🧮 Tính giá vận chuyển'}
                             </motion.button>
+
+                            {error && (
+                                <p className="text-red-500 text-sm font-medium mt-2">{error}</p>
+                            )}
                         </div>
 
                         {/* Result Display */}
@@ -144,7 +142,7 @@ export default function PriceCalculator() {
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    className="text-center p-8 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200"
+                                    className="text-center p-8 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200 w-full"
                                 >
                                     <Package className="w-16 h-16 text-green-600 mx-auto mb-4" />
                                     <h3 className="text-2xl font-bold text-gray-900 mb-2">Chi phí dự kiến</h3>
